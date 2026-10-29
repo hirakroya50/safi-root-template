@@ -6,21 +6,21 @@
   "schemaReference": "schemas/instance-config.schema.json",
   "uiSlots": {
     "header": {
-      "component": "Header",
-      "configPath": "branding.displayName"
+      "component": "SiteHeader",
+      "configPath": "displayName"
     },
     "navigation": {
-      "component": "Navigation",
-      "configPath": "branding.appId"
+      "component": "SiteHeader",
+      "configPath": "navigation"
     },
     "chatPane": {
       "component": "ChatPane",
-      "configPath": "branding.appId",
+      "configPath": "appId",
       "demoLabel": "Demo Chat (nonfunctional)"
     },
     "workspace": {
-      "component": "WorkspacePlaceholder",
-      "configPath": "branding.subtitle"
+      "component": "Workspace",
+      "configPath": "offerings"
     }
   }
 }

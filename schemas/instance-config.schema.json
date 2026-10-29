@@ -3,27 +3,29 @@
   "title": "SAFI Instance Configuration",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "appId",
-    "displayName",
-    "subtitle",
-    "palette"
-  ],
+  "required": ["appId", "displayName", "subtitle", "palette"],
   "properties": {
     "appId": {
       "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
       "description": "Unique identifier for the application instance"
     },
     "displayName": {
       "type": "string",
-      "description": "Human-readable application name"
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "Human-readable name shown as the home heading"
     },
     "subtitle": {
       "type": "string",
-      "description": "Subtitle displayed beneath the home heading"
+      "minLength": 1,
+      "maxLength": 120,
+      "description": "Short line beneath the home heading"
     },
     "palette": {
       "type": "object",
+      "additionalProperties": false,
       "required": ["primary", "background"],
       "properties": {
         "primary": {
@@ -34,7 +36,93 @@
         "background": {
           "type": "string",
           "format": "color",
-          "description": "Background color for the application"
+          "description": "Page background color"
+        }
+      }
+    },
+    "intro": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "One or two sentences that explain what this place or person offers"
+    },
+    "about": {
+      "type": "string",
+      "maxLength": 700,
+      "description": "Short story shown in the about section"
+    },
+    "navigation": {
+      "type": "array",
+      "maxItems": 4,
+      "items": { "$ref": "#/definitions/navLink" }
+    },
+    "sections": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "offerings": { "type": "string", "minLength": 1, "maxLength": 32 },
+        "about": { "type": "string", "minLength": 1, "maxLength": 32 },
+        "contact": { "type": "string", "minLength": 1, "maxLength": 32 }
+      }
+    },
+    "highlights": {
+      "type": "array",
+      "maxItems": 3,
+      "items": { "$ref": "#/definitions/highlight" }
+    },
+    "offerings": {
+      "type": "array",
+      "maxItems": 12,
+      "items": { "$ref": "#/definitions/offering" }
+    },
+    "contact": {
+      "type": "array",
+      "maxItems": 6,
+      "items": { "$ref": "#/definitions/contactItem" }
+    },
+    "primaryAction": { "$ref": "#/definitions/navLink" }
+  },
+  "definitions": {
+    "navLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "href"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 32 },
+        "href": {
+          "type": "string",
+          "enum": ["#top", "#offerings", "#about", "#contact"]
+        }
+      }
+    },
+    "highlight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 24 },
+        "value": { "type": "string", "minLength": 1, "maxLength": 40 }
+      }
+    },
+    "offering": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "detail"],
+      "properties": {
+        "meta": { "type": "string", "maxLength": 32 },
+        "title": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "detail": { "type": "string", "minLength": 1, "maxLength": 180 }
+      }
+    },
+    "contactItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1, "maxLength": 24 },
+        "value": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "href": {
+          "type": "string",
+          "pattern": "^(#(top|offerings|about|contact)|mailto:[^\\s@]+@[^\\s@]+\\.[^\\s@]+|tel:\\+?[0-9][0-9().\\- ]{2,20})$"
         }
       }
     }

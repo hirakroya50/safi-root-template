@@ -1,9 +1,48 @@
 {
   "appId": "safi-career-001",
-  "displayName": "SAFI Career",
-  "subtitle": "Explore career opportunities",
+  "displayName": "Amelia Cho",
+  "subtitle": "Independent product designer",
   "palette": {
-    "primary": "#3b82f6",
-    "background": "#f8fafc"
-  }
+    "primary": "#7C3AED",
+    "background": "#F7F4FF"
+  },
+  "intro": "Clear product surfaces for small teams who need the work to feel considered and ship on time.",
+  "about": "Amelia works with one client at a time. Most projects start with the screen people already struggle with, then grow only as far as the product needs.",
+  "navigation": [
+    { "label": "Work", "href": "#offerings" },
+    { "label": "About", "href": "#about" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "sections": {
+    "offerings": "Selected work",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "highlights": [
+    { "label": "Practice", "value": "Solo" },
+    { "label": "Focus", "value": "Product UI" },
+    { "label": "Based", "value": "Seattle" }
+  ],
+  "offerings": [
+    {
+      "meta": "2025",
+      "title": "Field notes",
+      "detail": "A research library for a four-person studio. Quieter navigation, faster reading."
+    },
+    {
+      "meta": "2024",
+      "title": "Northwind ledger",
+      "detail": "Billing screens for a bookkeeping practice, with fewer steps from invoice to paid."
+    },
+    {
+      "meta": "2023",
+      "title": "Harbor clinic",
+      "detail": "A patient intake flow that staff can finish between appointments."
+    }
+  ],
+  "contact": [
+    { "label": "Email", "value": "studio@ameliacho.example", "href": "mailto:studio@ameliacho.example" },
+    { "label": "Location", "value": "Seattle, by appointment" }
+  ],
+  "primaryAction": { "label": "Start a project", "href": "#contact" }
 }

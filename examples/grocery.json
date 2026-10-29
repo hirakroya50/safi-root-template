@@ -1,0 +1,54 @@
+{
+  "appId": "greenmarket-co",
+  "displayName": "Greenmarket",
+  "subtitle": "Groceries for the week",
+  "palette": {
+    "primary": "#16A34A",
+    "background": "#F3FFF6"
+  },
+  "intro": "A compact market for produce, pantry staples, and the few things you would rather not hunt for.",
+  "about": "Greenmarket is one room and a back cooler. We stock what we would cook with ourselves and skip the aisles that only add noise.",
+  "navigation": [
+    { "label": "Aisles", "href": "#offerings" },
+    { "label": "The market", "href": "#about" },
+    { "label": "Find us", "href": "#contact" }
+  ],
+  "sections": {
+    "offerings": "Aisles",
+    "about": "The market",
+    "contact": "Find us"
+  },
+  "highlights": [
+    { "label": "Open", "value": "8am–8pm" },
+    { "label": "Delivery", "value": "Same day" },
+    { "label": "Growers", "value": "Local first" }
+  ],
+  "offerings": [
+    {
+      "meta": "Produce",
+      "title": "This week's vegetables",
+      "detail": "A short list from nearby farms, priced by the piece so you can shop for two or for six."
+    },
+    {
+      "meta": "Dairy",
+      "title": "Milk, eggs, and butter",
+      "detail": "Everyday staples from creameries we can name, kept cold and restocked each morning."
+    },
+    {
+      "meta": "Pantry",
+      "title": "Oil, grain, and salt",
+      "detail": "The bottles and bags that actually get used, in sizes that fit a home shelf."
+    },
+    {
+      "meta": "Counter",
+      "title": "Flowers and bread",
+      "detail": "A weekend loaf and a bunch of flowers by the register, while they last."
+    }
+  ],
+  "contact": [
+    { "label": "Address", "value": "90 Cedar Avenue" },
+    { "label": "Hours", "value": "Daily, 8am–8pm" },
+    { "label": "Orders", "value": "hello@greenmarket.example", "href": "mailto:hello@greenmarket.example" }
+  ],
+  "primaryAction": { "label": "See today’s aisles", "href": "#offerings" }
+}

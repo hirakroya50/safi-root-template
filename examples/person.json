@@ -1,0 +1,48 @@
+{
+  "appId": "jonah-ellis",
+  "displayName": "Jonah Ellis",
+  "subtitle": "Writer and walking guide",
+  "palette": {
+    "primary": "#4F46E5",
+    "background": "#F5F6FF"
+  },
+  "intro": "Essays about the city, and small-group walks for people who want the long way through a neighborhood.",
+  "about": "Jonah writes during the week and leads walks on Saturday mornings. Groups stay under eight so the route can change when the conversation does.",
+  "navigation": [
+    { "label": "Walks", "href": "#offerings" },
+    { "label": "About", "href": "#about" },
+    { "label": "Write", "href": "#contact" }
+  ],
+  "sections": {
+    "offerings": "Walks",
+    "about": "About",
+    "contact": "Write"
+  },
+  "highlights": [
+    { "label": "Group", "value": "Eight people" },
+    { "label": "Day", "value": "Saturday" },
+    { "label": "City", "value": "Seattle" }
+  ],
+  "offerings": [
+    {
+      "meta": "Morning",
+      "title": "Pike to the water",
+      "detail": "Two hours downhill, with stops for the buildings people walk past every day."
+    },
+    {
+      "meta": "Market",
+      "title": "A grocery hour",
+      "detail": "How a neighborhood shop decides what to put near the door."
+    },
+    {
+      "meta": "Desk",
+      "title": "A commissioned essay",
+      "detail": "A reported piece for a shop, a practice, or a person with a story worth telling once."
+    }
+  ],
+  "contact": [
+    { "label": "Email", "value": "jonah@ellis.example", "href": "mailto:jonah@ellis.example" },
+    { "label": "Walks", "value": "Saturdays at 9am" }
+  ],
+  "primaryAction": { "label": "Ask about a walk", "href": "#contact" }
+}

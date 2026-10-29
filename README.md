@@ -33,21 +33,44 @@ At the repo root:
 
 ## Configuration
 
-The template reads a JSON configuration object that must validate against
-`schemas/instance-config.schema.json`. Required properties:
+One React shell serves every client. Personality comes from a JSON document
+that must validate against `schemas/instance-config.schema.json`.
+Unknown properties are rejected. Links may only be in-page (`#top`,
+`#offerings`, `#about`, `#contact`), `mailto:`, or `tel:`.
+
+Required properties:
 
 - **appId** (`string`) — Unique instance identifier
-- **displayName** (`string`) — Header heading text
-- **subtitle** (`string`) — Subtitle text beneath the heading
+- **displayName** (`string`) — Home heading and wordmark
+- **subtitle** (`string`) — Short line above the heading
 - **palette** (`object`) — Branding colors
   - **primary** (`string`) — Primary color (hex, rgb, or named color)
-  - **background** (`string`) — Background color
+  - **background** (`string`) — Page background color
 
-Example configurations are available in `examples/business.json` and
-`examples/career.json`.
+Optional properties shape the page without a code change:
 
-To supply a configuration at build time, set the `SAFI_CONFIG` environment
-variable to a JSON string or path, or serve the config via the hosting layer.
+- **intro** and **about** — The opening sentence and the about passage
+- **navigation** — Up to four in-page links
+- **sections** — Labels for offerings, about, and contact
+- **highlights** — Up to three facts under the heading
+- **offerings** — Cards for a menu, aisle, service, or piece of work
+- **contact** — Address, hours, phone, or email
+- **primaryAction** — The single button label and in-page target
+
+Examples for the same shell:
+
+| File | Client |
+| --- | --- |
+| `examples/coffee.json` | Coffee shop |
+| `examples/grocery.json` | Grocery shop |
+| `examples/person.json` | Individual person |
+| `examples/business.json` | Self-owned practice |
+| `examples/career.json` | Independent designer |
+
+With no injected configuration, the dev server shows the coffee shop sample.
+Every page is marked “This is a template UI” and carries the name Lotus AI Works Inc.
+Hosting supplies a real client by setting `window.__SAFI_CONFIG__` to the
+JSON before the app loads. The chat pane stays labeled as a nonfunctional demo.
 
 ## Running Tests
 
@@ -60,11 +83,12 @@ npm test
 ```
 
 Tests verify:
-- Both business and career configurations render correctly
-- Invalid configurations are rejected gracefully
+- Coffee, grocery, individual, and business configurations render from JSON
+- A configuration with only the required fields still renders
+- Unsafe links are dropped and the page stays up
 - Navigation and deep links work
 - Refresh preserves the configured state
-- Responsive layout works at mobile and desktop widths
+- Layout stacks on a phone and sits side by side on a desktop
 
 ## Building and Deployment
 

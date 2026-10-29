@@ -1,0 +1,54 @@
+{
+  "appId": "hearth-and-rye",
+  "displayName": "A Hearth & Rye",
+  "subtitle": "Neighborhood coffee bar",
+  "palette": {
+    "primary": "#F15A24",
+    "background": "#FFF6EE"
+  },
+  "intro": "Espresso roasted in small lots, a short pastry list, and a room quiet enough to stay awhile.",
+  "about": "Hearth & Rye is a single room on Pine Street. We roast two days a week, bake what we can sell in a morning, and leave the rest of the day unhurried.",
+  "navigation": [
+    { "label": "Menu", "href": "#offerings" },
+    { "label": "The bar", "href": "#about" },
+    { "label": "Visit", "href": "#contact" }
+  ],
+  "sections": {
+    "offerings": "Menu",
+    "about": "The bar",
+    "contact": "Visit"
+  },
+  "highlights": [
+    { "label": "Hours", "value": "Daily, 7–3" },
+    { "label": "Since", "value": "2016" },
+    { "label": "Room", "value": "32 seats" }
+  ],
+  "offerings": [
+    {
+      "meta": "Espresso",
+      "title": "House espresso",
+      "detail": "Chocolate, citrus, and a clean finish. Served as a short or long pull."
+    },
+    {
+      "meta": "Brew",
+      "title": "Batch filter",
+      "detail": "One coffee on the brew bar each morning, changed when the pot runs out."
+    },
+    {
+      "meta": "Milk",
+      "title": "Oat cortado",
+      "detail": "Equal parts espresso and steamed oat milk, lightly sweet."
+    },
+    {
+      "meta": "Pastry",
+      "title": "Morning bun",
+      "detail": "Laminated dough, orange sugar, baked before open."
+    }
+  ],
+  "contact": [
+    { "label": "Address", "value": "418 Pine Street" },
+    { "label": "Hours", "value": "Every day, 7am–3pm" },
+    { "label": "Phone", "value": "(206) 555-0148", "href": "tel:+12065550148" }
+  ],
+  "primaryAction": { "label": "Plan a visit", "href": "#contact" }
+}

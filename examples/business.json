@@ -1,9 +1,53 @@
 {
   "appId": "safi-business-001",
-  "displayName": "SAFI Business",
-  "subtitle": "Manage your business operations",
+  "displayName": "Fieldnote Studio",
+  "subtitle": "Bookkeeping for independent shops",
   "palette": {
-    "primary": "#10b981",
-    "background": "#f8fafc"
-  }
+    "primary": "#0D9488",
+    "background": "#F2FFFC"
+  },
+  "intro": "Monthly books, calm reporting, and a person who already knows how a small shop actually runs.",
+  "about": "Fieldnote Studio keeps the books for cafes, markets, and one-person practices. The work is close, recurring, and explained in plain language.",
+  "navigation": [
+    { "label": "Services", "href": "#offerings" },
+    { "label": "The practice", "href": "#about" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "sections": {
+    "offerings": "Services",
+    "about": "The practice",
+    "contact": "Contact"
+  },
+  "highlights": [
+    { "label": "Clients", "value": "Shops and solos" },
+    { "label": "Cadence", "value": "Monthly" },
+    { "label": "Based", "value": "Remote" }
+  ],
+  "offerings": [
+    {
+      "meta": "Monthly",
+      "title": "Books in order",
+      "detail": "Categorized transactions, reconciliations, and a short note on what changed."
+    },
+    {
+      "meta": "Tax",
+      "title": "Ready for your preparer",
+      "detail": "A clean package at year end, with the questions answered before they are asked."
+    },
+    {
+      "meta": "Payroll",
+      "title": "Pay for a small team",
+      "detail": "Wages, filings, and a calendar your staff can trust."
+    },
+    {
+      "meta": "Advice",
+      "title": "A monthly read",
+      "detail": "Thirty minutes on cash, margins, and the one decision in front of you."
+    }
+  ],
+  "contact": [
+    { "label": "Email", "value": "hello@fieldnote.example", "href": "mailto:hello@fieldnote.example" },
+    { "label": "Hours", "value": "Weekdays, 9am–4pm" }
+  ],
+  "primaryAction": { "label": "Book a conversation", "href": "#contact" }
 }

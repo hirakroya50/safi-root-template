@@ -1,20 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  ReactNode
-} from 'react'
+import { createContext, useContext } from 'react'
+import type { InstanceConfig } from '../config'
 
-export interface Palette {
-  primary: string
-  background: string
-}
-
-export interface BrandingConfig {
-  appId: string
-  displayName: string
-  subtitle: string
-  palette: Palette
-}
+export type BrandingConfig = InstanceConfig
 
 const BrandingContext = createContext<BrandingConfig | undefined>(undefined)
 
