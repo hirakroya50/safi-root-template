@@ -30,6 +30,9 @@ export const SiteHeader: React.FC = () => {
             {item.label}
           </a>
         ))}
+        <a href="#desk" aria-current={hash === '#desk' ? 'true' : undefined}>
+          Account
+        </a>
       </nav>
       <a className="safi-action" href={config.primaryAction.href}>
         {config.primaryAction.label}

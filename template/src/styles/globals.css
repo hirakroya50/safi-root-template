@@ -253,14 +253,16 @@ a {
 
 .safi-workspace,
 .safi-about,
-.safi-contact {
+.safi-contact,
+.safi-desk {
   margin-top: 3.25rem;
   scroll-margin-top: 15rem;
 }
 
 .safi-workspace h2,
 .safi-about h2,
-.safi-contact h2 {
+.safi-contact h2,
+.safi-desk h2 {
   margin: 0 0 1rem;
   font-family: var(--safi-display);
   font-size: clamp(2rem, 4vw, 2.6rem);
@@ -342,6 +344,104 @@ a {
 .safi-empty {
   color: var(--safi-muted);
   padding: 1.25rem 0;
+}
+
+.safi-desk h3,
+.safi-record-list h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--safi-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.safi-form,
+.safi-desk-block,
+.safi-record-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.safi-form {
+  max-width: 32rem;
+}
+
+.safi-field {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--safi-muted);
+}
+
+.safi-field input,
+.safi-field select,
+.safi-field textarea {
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--safi-on-background);
+  background: var(--safi-surface);
+  border: 1px solid var(--safi-line);
+  border-radius: 0.8rem;
+  min-height: 44px;
+  padding: 0.55rem 0.75rem;
+  width: 100%;
+}
+
+.safi-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.safi-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 0;
+  background: var(--safi-primary);
+  color: var(--safi-on-primary);
+  font: inherit;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+
+.safi-button-quiet {
+  background: transparent;
+  color: var(--safi-primary);
+  border: 1px solid var(--safi-line);
+}
+
+.safi-record-list {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+
+.safi-record-list > li {
+  background: var(--safi-surface);
+  border: 1px solid var(--safi-line);
+  border-radius: 1.15rem;
+  padding: 1rem 1.1rem;
+}
+
+.safi-record-list ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.1rem;
+}
+
+.safi-note,
+.safi-error {
+  margin: 0.8rem 0 0;
+}
+
+.safi-error {
+  color: #b42318;
 }
 
 .safi-colophon {
@@ -457,7 +557,8 @@ a {
 
   .safi-workspace,
   .safi-about,
-  .safi-contact {
+  .safi-contact,
+  .safi-desk {
     scroll-margin-top: 8.5rem;
   }
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { BrandingProvider } from './components/BrandingProvider'
 import { ChatPane } from './components/ChatPane'
 import { SiteHeader } from './components/SiteHeader'
+import { ShopDesk } from './components/ShopDesk'
 import { Workspace } from './components/Workspace'
 import { readConfig, themeVars } from './config'
 
@@ -71,6 +72,7 @@ const App: React.FC = () => {
                 </dl>
               )}
             </section>
+            <ShopDesk />
           </main>
           <aside className="safi-branding">
             <ChatPane />

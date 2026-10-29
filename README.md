@@ -74,6 +74,17 @@ Every page is marked “This is a template UI” and carries the name Lotus AI W
 Hosting supplies a real client by setting `window.__SAFI_CONFIG__` to the
 JSON before the app loads. The chat pane stays labeled as a nonfunctional demo.
 
+## Supabase
+
+Every client uses the same tables. Sign-in is Supabase Auth. The shop fields live in `profiles`, the catalog in `products`, and purchases in `orders` plus `order_items`.
+
+1. Create a Supabase project for the client.
+2. Open the SQL editor and run `template/supabase/schema.sql`.
+3. Copy `template/.env.example` to `template/.env` and set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`.
+4. Start the app and open Account. The first account created becomes admin. Later accounts are members. An admin can set a profile role to `manager`.
+
+Roles are `admin`, `manager`, and `member`. Managers and admins can add, edit, and delete products and update payment and delivery status. Any signed-in person can place an order.
+
 ## Running Tests
 
 ```bash
