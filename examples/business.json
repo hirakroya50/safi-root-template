@@ -1,0 +1,9 @@
+{
+  "appId": "safi-business-001",
+  "displayName": "SAFI Business",
+  "subtitle": "Manage your business operations",
+  "palette": {
+    "primary": "#10b981",
+    "background": "#f8fafc"
+  }
+}

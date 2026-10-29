@@ -1,0 +1,9 @@
+{
+  "appId": "safi-career-001",
+  "displayName": "SAFI Career",
+  "subtitle": "Explore career opportunities",
+  "palette": {
+    "primary": "#3b82f6",
+    "background": "#f8fafc"
+  }
+}

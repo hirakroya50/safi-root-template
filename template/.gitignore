@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.logs
+
+# Production build
+dist/
+/dist/
+
+# Environment variables
+.env*
+.local*
+
+# Vite and TypeScript
+.vite/
+coverage/
+*.tsbuildinfo
+rc.local
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# OS
+.DS_Store

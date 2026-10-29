@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SAFI Instance Configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "appId",
+    "displayName",
+    "subtitle",
+    "palette"
+  ],
+  "properties": {
+    "appId": {
+      "type": "string",
+      "description": "Unique identifier for the application instance"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable application name"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Subtitle displayed beneath the home heading"
+    },
+    "palette": {
+      "type": "object",
+      "required": ["primary", "background"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "format": "color",
+          "description": "Primary brand color (hex, rgb, or named color)"
+        },
+        "background": {
+          "type": "string",
+          "format": "color",
+          "description": "Background color for the application"
+        }
+      }
+    }
+  }
+}
