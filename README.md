@@ -103,6 +103,23 @@ Tests verify:
 - Refresh preserves the configured state
 - Layout stacks on a phone and sits side by side on a desktop
 
+## Publish to Vercel
+
+A personal Vercel Hobby account can host this static site for free. Hobby is for personal, non-commercial use, with about 100 GB of traffic and 100 deployments a day. A coffee shop or other client site made for a business is commercial use, so that site needs a paid Vercel plan.
+
+```bash
+# Token from https://vercel.com/account/tokens
+# Put VERCEL_TOKEN in template/.env, or export it in the shell.
+export VERCEL_TOKEN=your-token
+
+# Build template/ in a temporary folder and publish it
+node scripts/import-and-deploy.mjs
+```
+
+The stable address is `https://safi-root-template.vercel.app`. Set `VERCEL_PROJECT_NAME` to choose another project name. Run the script again to replace that same address. Pass `--dist template/dist` to publish a folder you already built, or `--prepare` to build without publishing.
+
+The token is not given to the build. The script checks the live page for this run's source SHA.
+
 ## Building and Deployment
 
 ```bash
