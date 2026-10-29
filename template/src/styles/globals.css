@@ -9,8 +9,8 @@
   --safi-tint: rgba(241, 90, 36, 0.2);
   --safi-header: rgba(255, 246, 238, 0.92);
   --safi-lotus: #e2186f;
-  --safi-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  --safi-sans: "Avenir Next", "Segoe UI", sans-serif;
+  --safi-display: "Inter", "Segoe UI", system-ui, sans-serif;
+  --safi-sans: "Inter", "Segoe UI", system-ui, sans-serif;
 }
 
 * {
@@ -154,6 +154,11 @@ a {
   white-space: nowrap;
 }
 
+.safi-nav a:hover {
+  color: var(--safi-on-background);
+  background: var(--safi-tint);
+}
+
 .safi-nav a[aria-current='true'] {
   color: var(--safi-on-background);
   background: var(--safi-tint);
@@ -168,13 +173,19 @@ a {
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  padding: 0 1.05rem;
+  padding: 0 1.15rem;
   border-radius: 999px;
-  background: var(--safi-primary);
-  color: var(--safi-on-primary);
+  background: var(--safi-lotus);
+  color: #ffffff;
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   letter-spacing: 0.01em;
+  box-shadow: 0 10px 24px rgba(226, 24, 111, 0.24);
+}
+
+.safi-action:hover {
+  background: #c41262;
 }
 
 .safi-frame {
@@ -188,8 +199,14 @@ a {
 }
 
 .safi-hero {
+  display: grid;
+  gap: 1.35rem;
+  align-items: stretch;
+  padding-top: 0.25rem;
+}
+
+.safi-hero-copy {
   max-width: 38rem;
-  padding-top: 0.5rem;
 }
 
 .safi-kicker,
@@ -204,12 +221,12 @@ a {
 }
 
 .safi-hero h1 {
-  margin: 0.45rem 0 0;
+  margin: 0.4rem 0 0;
   font-family: var(--safi-display);
-  font-size: clamp(2.4rem, 11vw, 4.6rem);
+  font-size: clamp(2.5rem, 8vw, 4.15rem);
   font-weight: 500;
   letter-spacing: -0.035em;
-  line-height: 0.95;
+  line-height: 0.98;
   overflow-wrap: anywhere;
 }
 
@@ -227,13 +244,16 @@ a {
 .safi-highlights {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.75rem;
-  margin: 2.5rem 0 0;
+  gap: 0.65rem;
+  margin: 0;
+  align-content: end;
 }
 
 .safi-highlights div {
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--safi-line);
+  background: var(--safi-surface);
+  border: 1px solid var(--safi-line);
+  border-radius: 1rem;
+  padding: 0.85rem 1rem;
 }
 
 .safi-highlights dt {
@@ -284,10 +304,18 @@ a {
 }
 
 .safi-offering-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
   background: var(--safi-surface);
   border: 1px solid var(--safi-line);
   border-radius: 1.15rem;
-  padding: 1.15rem 1.2rem 1.2rem;
+  padding: 1.15rem 1.2rem 1.25rem;
+  box-shadow: 0 12px 28px rgba(26, 20, 35, 0.04);
+}
+
+.safi-offering-list li:hover {
+  border-color: rgba(226, 24, 111, 0.38);
 }
 
 .safi-offering-list h3 {
@@ -305,8 +333,21 @@ a {
   margin: 0;
 }
 
+.safi-offering-detail {
+  color: var(--safi-muted);
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+.safi-about {
+  background: var(--safi-surface);
+  border: 1px solid var(--safi-line);
+  border-radius: 1.25rem;
+  padding: 1.35rem 1.3rem 1.5rem;
+}
+
 .safi-about p {
-  max-width: 38rem;
+  max-width: 40rem;
   font-family: var(--safi-display);
   font-size: 1.28rem;
   line-height: 1.45;
@@ -314,15 +355,18 @@ a {
 
 .safi-contact dl {
   display: grid;
-  gap: 0.9rem;
+  gap: 0.7rem;
   margin: 0;
 }
 
 .safi-contact div {
   display: grid;
-  gap: 0.15rem;
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--safi-line);
+  gap: 0.2rem;
+  align-content: start;
+  background: var(--safi-surface);
+  border: 1px solid var(--safi-line);
+  border-radius: 1rem;
+  padding: 0.9rem 1rem;
 }
 
 .safi-contact dt {
@@ -401,20 +445,32 @@ a {
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  padding: 0 1rem;
+  padding: 0 1.05rem;
   border-radius: 999px;
   border: 0;
-  background: var(--safi-primary);
-  color: var(--safi-on-primary);
+  background: var(--safi-lotus);
+  color: #ffffff;
   font: inherit;
+  font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
+  box-shadow: 0 10px 24px rgba(226, 24, 111, 0.22);
 }
 
-.safi-button-quiet {
+.safi-button:hover {
+  background: #c41262;
+}
+
+.safi-button-quiet,
+.safi-button-quiet:hover {
   background: transparent;
   color: var(--safi-primary);
   border: 1px solid var(--safi-line);
+  box-shadow: none;
+}
+
+.safi-button-quiet:hover {
+  background: var(--safi-tint);
 }
 
 .safi-record-list {
@@ -464,11 +520,13 @@ a {
   padding: 1rem;
   display: grid;
   gap: 1rem;
+  min-width: 0;
 }
 
 .safi-chat-heading {
   display: grid;
   gap: 0.4rem;
+  min-width: 0;
 }
 
 .safi-chat-heading p,
@@ -482,16 +540,27 @@ a {
 
 .safi-chat-label {
   color: var(--safi-primary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  max-width: 100%;
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.safi-chat-heading p {
+  overflow-wrap: break-word;
 }
 
 .safi-chat-form {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem;
+  min-width: 0;
 }
 
 .safi-chat-form input,
@@ -503,6 +572,11 @@ a {
   min-height: 44px;
   padding: 0 0.9rem;
   font: inherit;
+}
+
+.safi-chat-form input {
+  min-width: 0;
+  width: 100%;
 }
 
 .safi-visually-hidden {
@@ -521,14 +595,15 @@ a {
   outline-offset: 3px;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 480px) and (max-width: 959px) {
   .safi-highlights {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 720px) {
-  .safi-offering-list {
+  .safi-offering-list,
+  .safi-contact dl {
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -547,7 +622,13 @@ a {
   .safi-frame {
     grid-template-columns: minmax(0, 1fr) 300px;
     width: min(1120px, calc(100% - 3rem));
-    padding-top: 3rem;
+    padding-top: 2.5rem;
+  }
+
+  .safi-hero {
+    grid-template-columns: minmax(0, 1.4fr) minmax(15rem, 0.72fr);
+    gap: 1.75rem;
+    align-items: start;
   }
 
   .safi-chat-pane {
@@ -600,5 +681,11 @@ a {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 479px) {
+  .safi-highlights dd {
+    font-size: 1.2rem;
   }
 }

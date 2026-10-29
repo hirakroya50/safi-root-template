@@ -1,24 +1,36 @@
 {
-    "appId": "lotus-cafe",
-    "displayName": "Lotus Cafe",
-    "subtitle": "Coffee and cake",
-    "palette": { "primary": "#F15A24", "background": "#FFF6EE" },
-    "intro": "One sentence about the place.",
-    "about": "A short story.",
-    "navigation": [
-      { "label": "Menu", "href": "#offerings" },
-      { "label": "About", "href": "#about" },
-      { "label": "Visit", "href": "#contact" }
-    ],
-    "sections": { "offerings": "Menu", "about": "About", "contact": "Visit" },
-    "highlights": [
-      { "label": "Hours", "value": "8am–6pm" }
-    ],
-    "offerings": [
-      { "meta": "Coffee", "title": "Espresso", "detail": "A short description." }
-    ],
-    "contact": [
-      { "label": "Phone", "value": "(206) 555-0100", "href": "tel:+12065550100" }
-    ],
-    "primaryAction": { "label": "Visit us", "href": "#contact" }
-  }
+  "appId": "lotus-cafe",
+  "displayName": "Lotus Cafe",
+  "subtitle": "Coffee, tea, and cake",
+  "palette": { "primary": "#F15A24", "background": "#FFF6EE" },
+  "intro": "A corner cafe for slow coffee and cake baked this morning. Stay by the window, or take a cup two blocks south to the park.",
+  "about": "Lotus Cafe is a small room with a short menu. We pull espresso, steep tea, and bake only what we can sell in a day. The olive oil cake usually goes first. If you want a table by the window, weekday mornings are the quiet ones.",
+  "navigation": [
+    { "label": "Menu", "href": "#offerings" },
+    { "label": "About", "href": "#about" },
+    { "label": "Visit", "href": "#contact" }
+  ],
+  "sections": { "offerings": "Menu", "about": "About", "contact": "Visit" },
+  "highlights": [
+    { "label": "Hours", "value": "Daily, 8–6" },
+    { "label": "Today", "value": "Cake until sold out" },
+    { "label": "Seats", "value": "18 by the window" }
+  ],
+  "offerings": [
+    { "meta": "Espresso · $3.50", "title": "Espresso", "detail": "A short pull with chocolate, citrus, and a clean finish." },
+    { "meta": "Milk · $5", "title": "Oat latte", "detail": "Espresso and steamed oat milk, lightly sweet, in an 8oz cup." },
+    { "meta": "Brew · $3.25", "title": "Batch brew", "detail": "One filter coffee on the bar, changed when the pot runs out." },
+    { "meta": "Tea · $4", "title": "Jasmine green", "detail": "A light pot for one. Ask if you want it iced." },
+    { "meta": "Cake · $6", "title": "Olive oil cake", "detail": "Citrus zest and almond. The slice most people come in for." },
+    { "meta": "Cake · $6.50", "title": "Chocolate loaf", "detail": "Dark cocoa, sliced after noon and served slightly warm." },
+    { "meta": "Pastry · $4.50", "title": "Morning bun", "detail": "Orange sugar, laminated, and baked before we open." },
+    { "meta": "Toast · $7", "title": "Ricotta toast", "detail": "Honey, lemon, and sea salt on thick country bread." }
+  ],
+  "contact": [
+    { "label": "Address", "value": "214 Belmont Ave E, Seattle" },
+    { "label": "Hours", "value": "Every day, 8am–6pm" },
+    { "label": "Phone", "value": "(206) 555-0100", "href": "tel:+12065550100" },
+    { "label": "Email", "value": "hello@lotus.cafe", "href": "mailto:hello@lotus.cafe" }
+  ],
+  "primaryAction": { "label": "See the menu", "href": "#offerings" }
+}

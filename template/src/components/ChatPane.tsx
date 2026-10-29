@@ -8,7 +8,10 @@ export const ChatPane: React.FC = () => {
   return (
     <section className="safi-chat-pane" data-safi-chat aria-label="Demo chat">
       <div className="safi-chat-heading">
-        <span className="safi-chat-label">Demo Chat (nonfunctional)</span>
+        <span className="safi-chat-label">
+          Demo Chat
+          <span className="safi-chat-status">(nonfunctional)</span>
+        </span>
         <p>Reserved for a future assistant. Nothing you type here is sent.</p>
       </div>
       <form

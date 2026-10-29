@@ -29,24 +29,26 @@ const App: React.FC = () => {
         <div className="safi-frame">
           <main className="safi-main" id="top">
             <section className="safi-hero">
-              <p className="safi-kicker">{config.subtitle}</p>
-              <h1>{config.displayName}</h1>
-              <p className="safi-intro">{config.intro}</p>
-              <a className="safi-action" href={config.primaryAction.href}>
-                {config.primaryAction.label}
-              </a>
-            </section>
+              <div className="safi-hero-copy">
+                <p className="safi-kicker">{config.subtitle}</p>
+                <h1>{config.displayName}</h1>
+                <p className="safi-intro">{config.intro}</p>
+                <a className="safi-action" href={config.primaryAction.href}>
+                  {config.primaryAction.label}
+                </a>
+              </div>
 
-            {config.highlights.length > 0 ? (
-              <dl className="safi-highlights">
-                {config.highlights.map((fact) => (
-                  <div key={fact.label}>
-                    <dt>{fact.label}</dt>
-                    <dd>{fact.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            ) : null}
+              {config.highlights.length > 0 ? (
+                <dl className="safi-highlights">
+                  {config.highlights.map((fact) => (
+                    <div key={fact.label}>
+                      <dt>{fact.label}</dt>
+                      <dd>{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+            </section>
 
             <Workspace />
 

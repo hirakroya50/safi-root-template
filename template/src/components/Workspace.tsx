@@ -15,10 +15,10 @@ export const Workspace: React.FC = () => {
         ) : (
           <ul className="safi-offering-list">
             {config.offerings.map((offering) => (
-              <li key={`${offering.title}-${offering.meta ?? ''}`}>
+              <li className="safi-offering" key={`${offering.title}-${offering.meta ?? ''}`}>
                 {offering.meta ? <p className="safi-meta">{offering.meta}</p> : null}
                 <h3>{offering.title}</h3>
-                <p>{offering.detail}</p>
+                <p className="safi-offering-detail">{offering.detail}</p>
               </li>
             ))}
           </ul>
