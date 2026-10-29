@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { AuthDialog } from './components/AuthDialog'
+import { AuthProvider } from './components/AuthProvider'
 import { BrandingProvider } from './components/BrandingProvider'
 import { ChatPane } from './components/ChatPane'
 import { SiteHeader } from './components/SiteHeader'
@@ -15,6 +17,7 @@ const App: React.FC = () => {
 
   return (
     <BrandingProvider value={config}>
+      <AuthProvider>
       <div className="safi-app" style={themeVars(config.palette)}>
         <a className="safi-skip" href="#offerings">
           Skip to {config.sections.offerings.toLowerCase()}
@@ -81,7 +84,9 @@ const App: React.FC = () => {
           </aside>
         </div>
         <p className="safi-colophon">Template UI by Lotus AI Works Inc.</p>
+        <AuthDialog />
       </div>
+      </AuthProvider>
     </BrandingProvider>
   )
 }

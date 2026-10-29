@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { monogram } from '../config'
+import { useAuth } from './AuthProvider'
 import { useBranding } from './BrandingProvider'
+
+function accountLabel(session: { user: { email?: string; user_metadata?: Record<string, unknown> } }): string {
+  const name = session.user.user_metadata?.name
+  if (typeof name === 'string' && name.trim()) return name.trim()
+  return session.user.email || 'Account'
+}
 
 export const SiteHeader: React.FC = () => {
   const config = useBranding()
+  const { session, dialogOpen, openAuth, signOut } = useAuth()
   const [hash, setHash] = useState(() => window.location.hash || '#top')
 
   useEffect(() => {
@@ -30,13 +38,30 @@ export const SiteHeader: React.FC = () => {
             {item.label}
           </a>
         ))}
-        <a href="#desk" aria-current={hash === '#desk' ? 'true' : undefined}>
-          Account
-        </a>
       </nav>
-      <a className="safi-action" href={config.primaryAction.href}>
-        {config.primaryAction.label}
-      </a>
+      <div className="safi-header-actions">
+        {session ? (
+          <>
+            <span className="safi-account-name">{accountLabel(session)}</span>
+            <button type="button" className="safi-button safi-button-quiet" onClick={() => void signOut()}>
+              Log out
+            </button>
+          </>
+        ) : (
+          <button
+            type="button"
+            className="safi-button safi-button-quiet"
+            aria-haspopup="dialog"
+            aria-expanded={dialogOpen}
+            onClick={() => openAuth('sign-in')}
+          >
+            Log in
+          </button>
+        )}
+        <a className="safi-action" href={config.primaryAction.href}>
+          {config.primaryAction.label}
+        </a>
+      </div>
     </header>
   )
 }

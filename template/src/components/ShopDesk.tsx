@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import type { Session } from '@supabase/supabase-js'
+import { useAuth } from './AuthProvider'
 import { supabase } from '../supabase/client'
 import {
   canManage,
@@ -22,16 +22,11 @@ function explain(message: string): string {
 }
 
 export const ShopDesk: React.FC = () => {
-  const [session, setSession] = useState<Session | null>(null)
+  const { configured, session, refreshKey, refresh, pushToast } = useAuth()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [products, setProducts] = useState<Product[]>([])
   const [orders, setOrders] = useState<Order[]>([])
-  const [notice, setNotice] = useState('')
   const [error, setError] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('4.50')
@@ -39,13 +34,6 @@ export const ShopDesk: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [orderProductId, setOrderProductId] = useState('')
   const [orderQuantity, setOrderQuantity] = useState('1')
-
-  useEffect(() => {
-    if (!supabase) return
-    supabase.auth.getSession().then(({ data }) => setSession(data.session))
-    const { data } = supabase.auth.onAuthStateChange((_event, next) => setSession(next))
-    return () => data.subscription.unsubscribe()
-  }, [])
 
   useEffect(() => {
     const client = supabase
@@ -65,7 +53,9 @@ export const ShopDesk: React.FC = () => {
         .maybeSingle()
       if (cancelled) return
       if (profileResult.error) {
-        setError(explain(profileResult.error.message))
+        const message = explain(profileResult.error.message)
+        setError(message)
+        pushToast('error', message)
         return
       }
       const nextProfile = profileResult.data as Profile | null
@@ -104,42 +94,7 @@ export const ShopDesk: React.FC = () => {
     return () => {
       cancelled = true
     }
-  }, [session])
-
-  const signIn = async (event: React.FormEvent) => {
-    event.preventDefault()
-    if (!supabase) return
-    setError('')
-    setNotice('')
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
-    setError(signInError ? explain(signInError.message) : '')
-  }
-
-  const signUp = async () => {
-    if (!supabase) return
-    setError('')
-    setNotice('')
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { name, phone } },
-    })
-    if (signUpError) {
-      setError(explain(signUpError.message))
-      return
-    }
-    setNotice(
-      data.session
-        ? 'Account created. The first account in an empty project is the admin.'
-        : 'Account created. Confirm the email, then sign in.',
-    )
-  }
-
-  const signOut = async () => {
-    if (!supabase) return
-    await supabase.auth.signOut()
-    setNotice('')
-  }
+  }, [session, refreshKey, pushToast])
 
   const saveProduct = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -161,7 +116,7 @@ export const ShopDesk: React.FC = () => {
     setTitle('')
     setDescription('')
     setEditingId(null)
-    setSession((current) => (current ? { ...current } : current))
+    refresh()
   }
 
   const removeProduct = async (id: string) => {
@@ -171,7 +126,7 @@ export const ShopDesk: React.FC = () => {
       setError(explain(deleteError.message))
       return
     }
-    setSession((current) => (current ? { ...current } : current))
+    refresh()
   }
 
   const placeOrder = async (event: React.FormEvent) => {
@@ -200,7 +155,7 @@ export const ShopDesk: React.FC = () => {
       setError(explain(item.error.message))
       return
     }
-    setSession((current) => (current ? { ...current } : current))
+    refresh()
   }
 
   const updateStatus = async (
@@ -213,73 +168,27 @@ export const ShopDesk: React.FC = () => {
       setError(explain(updateError.message))
       return
     }
-    setSession((current) => (current ? { ...current } : current))
+    refresh()
   }
+
+  if (configured && !session) return null
 
   return (
     <section className="safi-desk" id="desk" aria-labelledby="desk-title">
       <h2 id="desk-title">Account</h2>
-      {!supabase ? (
+      {!configured ? (
         <p className="safi-empty">
           Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY, then run template/supabase/schema.sql
           in the Supabase SQL editor.
         </p>
       ) : null}
 
-      {supabase && !session ? (
-        <form className="safi-form" onSubmit={signIn}>
-          <label className="safi-field">
-            Name
-            <input value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" />
-          </label>
-          <label className="safi-field">
-            Phone
-            <input value={phone} onChange={(event) => setPhone(event.target.value)} autoComplete="tel" />
-          </label>
-          <label className="safi-field">
-            Email
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              autoComplete="email"
-            />
-          </label>
-          <label className="safi-field">
-            Password
-            <input
-              type="password"
-              required
-              minLength={6}
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              autoComplete="current-password"
-            />
-          </label>
-          <div className="safi-form-actions">
-            <button className="safi-button" type="submit">
-              Sign in
-            </button>
-            <button className="safi-button safi-button-quiet" type="button" onClick={signUp}>
-              Create account
-            </button>
-          </div>
-        </form>
-      ) : null}
-
       {profile ? (
-        <div className="safi-desk-block">
-          <p>
-            {profile.name || profile.email} · {profile.role}
-          </p>
-          <button className="safi-button safi-button-quiet" type="button" onClick={signOut}>
-            Sign out
-          </button>
-        </div>
+        <p className="safi-desk-identity">
+          {profile.name || profile.email} · {profile.role}
+        </p>
       ) : null}
 
-      {notice ? <p className="safi-note">{notice}</p> : null}
       {error ? <p className="safi-error">{error}</p> : null}
 
       {profile && canManage(profile.role) ? (
