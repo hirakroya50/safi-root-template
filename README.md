@@ -68,6 +68,8 @@ Examples for the same shell:
 | `examples/career.json` | Independent designer |
 
 With no injected configuration, the dev server shows the coffee shop sample.
+To preview a client file while the dev server is running, open
+`http://localhost:5173/?example=lotus-cafe` (the name is the JSON file in `examples/`, without `.json`).
 Every page is marked “This is a template UI” and carries the name Lotus AI Works Inc.
 Hosting supplies a real client by setting `window.__SAFI_CONFIG__` to the
 JSON before the app loads. The chat pane stays labeled as a nonfunctional demo.
