@@ -637,7 +637,8 @@ async function serve(port) {
   })
   await new Promise((resolve, reject) => {
     server.once('error', reject)
-    server.listen(port, '127.0.0.1', resolve)
+    // server.listen(port, '127.0.0.1', resolve)
+    server.listen(port, '0.0.0.0', resolve)
   })
   console.log(`Import page http://127.0.0.1:${port}`)
   console.log(`Vercel project ${projectName()}`)
