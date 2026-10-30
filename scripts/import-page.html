@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Import and deploy</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1c1915;
+      --muted: #6b645c;
+      --line: #e4ddd4;
+      --paper: #f6f3ee;
+      --panel: #fffdf9;
+      --accent: #0f6e56;
+      --log: #1a1916;
+      --log-text: #ece7df;
+      --danger: #9f2d2d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.5 "Iowan Old Style", Palatino, Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin: 0 0 8px;
+    }
+    .lede {
+      color: var(--muted);
+      max-width: 68ch;
+      margin: 0 0 28px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 340px) 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    form {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 20px;
+    }
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font: 12px/1.3 ui-sans-serif, system-ui, sans-serif;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    input[type="url"],
+    input[type="file"] {
+      width: 100%;
+      font: 15px/1.4 ui-sans-serif, system-ui, sans-serif;
+    }
+    input[type="url"] {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--ink);
+    }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px 16px;
+      border: 0;
+      background: var(--accent);
+      color: white;
+      font: 15px/1 ui-sans-serif, system-ui, sans-serif;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.55; cursor: wait; }
+    .or {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font: 13px/1.4 ui-sans-serif, system-ui, sans-serif;
+    }
+    .commands {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font: 13px/1.5 ui-sans-serif, system-ui, sans-serif;
+    }
+    code {
+      font: 12px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .log-wrap {
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      background: var(--log);
+      color: var(--log-text);
+    }
+    .log-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #33312c;
+      font: 13px/1.4 ui-sans-serif, system-ui, sans-serif;
+    }
+    #status[data-state="failed"] { color: #f0b4b4; }
+    #status[data-state="ready"] { color: #b7e4d4; }
+    #log {
+      margin: 0;
+      padding: 16px;
+      flex: 1;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font: 12.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+      max-height: 640px;
+    }
+    .result {
+      padding: 0 16px 16px;
+      font: 14px/1.45 ui-sans-serif, system-ui, sans-serif;
+    }
+    .result a { color: #d7efe4; }
+    .result[data-state="failed"] { color: #f0b4b4; }
+    @media (max-width: 800px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Import and deploy</h1>
+    <p class="lede">
+      Submit one Git URL or one ZIP. This page runs
+      <code>scripts/import-and-deploy2.mjs</code> on this machine, checks that the
+      project is a static React + TypeScript + Vite app with
+      <code>package-lock.json</code>, then publishes a Vercel deployment on
+      <code>safi-user-import</code>.
+    </p>
+    <div class="layout">
+      <form id="import-form">
+        <p class="or">One source</p>
+        <label for="git-url">Git URL</label>
+        <input id="git-url" name="gitUrl" type="url" inputmode="url" placeholder="https://github.com/org/repo.git" autocomplete="off">
+        <label for="archive">ZIP file</label>
+        <input id="archive" name="archive" type="file" accept=".zip,application/zip">
+        <button id="run" type="submit">Run import</button>
+        <p class="commands">
+          Same script from the terminal:<br>
+          <code>node scripts/import-and-deploy2.mjs --git &lt;url&gt;</code><br>
+          <code>node scripts/import-and-deploy2.mjs --zip &lt;file.zip&gt;</code>
+        </p>
+      </form>
+      <section class="log-wrap" aria-live="polite">
+        <div class="log-bar">
+          <span>Build and deploy</span>
+          <span id="status" data-state="idle">Idle</span>
+        </div>
+        <pre id="log"></pre>
+        <div id="result" class="result"></div>
+      </section>
+    </div>
+  </main>
+  <script>
+    const form = document.querySelector('#import-form')
+    const button = document.querySelector('#run')
+    const log = document.querySelector('#log')
+    const status = document.querySelector('#status')
+    const result = document.querySelector('#result')
+    const labels = {
+      import: 'Starting',
+      clone: 'Cloning',
+      unpack: 'Unpacking',
+      validate: 'Checking stack',
+      install: 'Installing',
+      build: 'Building',
+      deploy: 'Deploying',
+      ready: 'Ready',
+      failed: 'Failed',
+    }
+
+    function setStatus(step) {
+      status.dataset.state = step
+      status.textContent = labels[step] || step
+    }
+
+    function append(line) {
+      log.textContent += (log.textContent ? '\n' : '') + line
+      log.scrollTop = log.scrollHeight
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault()
+      const gitUrl = document.querySelector('#git-url').value.trim()
+      const archive = document.querySelector('#archive').files[0]
+      if (gitUrl && archive) {
+        setStatus('failed')
+        result.dataset.state = 'failed'
+        result.textContent = 'Submit a Git URL or a ZIP, not both.'
+        return
+      }
+      if (!gitUrl && !archive) {
+        setStatus('failed')
+        result.dataset.state = 'failed'
+        result.textContent = 'Enter a Git URL or choose a ZIP.'
+        return
+      }
+      button.disabled = true
+      log.textContent = ''
+      result.textContent = ''
+      result.dataset.state = ''
+      setStatus('import')
+      const body = new FormData()
+      if (gitUrl) body.set('gitUrl', gitUrl)
+      if (archive) body.set('archive', archive)
+      try {
+        const response = await fetch('/api/import', { method: 'POST', body })
+        if (!response.ok) {
+          const payload = await response.json().catch(() => ({}))
+          throw new Error(payload.error || `Request failed (${response.status})`)
+        }
+        const reader = response.body.getReader()
+        const decoder = new TextDecoder()
+        let buffer = ''
+        while (true) {
+          const chunk = await reader.read()
+          if (chunk.done) break
+          buffer += decoder.decode(chunk.value, { stream: true })
+          const lines = buffer.split('\n')
+          buffer = lines.pop() || ''
+          for (const line of lines) {
+            if (!line.trim()) continue
+            const item = JSON.parse(line)
+            if (item.step) setStatus(item.step)
+            if (item.type === 'log') append(`[${item.step}] ${item.message}`)
+            if (item.type === 'done') {
+              result.dataset.state = 'ready'
+              result.innerHTML = ''
+              const link = document.createElement('a')
+              link.href = item.deploymentUrl
+              link.textContent = item.deploymentUrl
+              link.target = '_blank'
+              link.rel = 'noopener'
+              result.append('Deployment ', link)
+            }
+            if (item.type === 'error') {
+              result.dataset.state = 'failed'
+              result.textContent = item.message
+              append(`[failed] ${item.message}`)
+            }
+          }
+        }
+      } catch (error) {
+        setStatus('failed')
+        result.dataset.state = 'failed'
+        result.textContent = error instanceof Error ? error.message : String(error)
+      } finally {
+        button.disabled = false
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "import-page": "node scripts/import-and-deploy2.mjs --serve"
+  },
   "devDependencies": {
     "@playwright/test": "^1.64.1"
   }
