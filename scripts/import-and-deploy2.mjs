@@ -640,7 +640,8 @@ async function serve(port) {
     // server.listen(port, '127.0.0.1', resolve)
     server.listen(port, '0.0.0.0', resolve)
   })
-  console.log(`Import page http://127.0.0.1:${port}`)
+  // console.log(`Import page http://127.0.0.1:${port}`)
+  console.log(`Import page http://0.0.0.0:${port}`)
   console.log(`Vercel project ${projectName()}`)
 }
 
