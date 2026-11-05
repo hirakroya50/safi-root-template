@@ -602,7 +602,7 @@ async function handleImport(req, res) {
       zipPath: zipFile,
       onEvent: send,
     })
-    send({ type: 'log', step: 'ready', message: `Deployment ${record.deploymentUrl}` })
+    send({ type: 'log', step: 'ready', message: `Deployment ${record.deploymentUrl}  or https://safi-user-import.vercel.app/` })
   } catch (error) {
     send({ type: 'error', step: 'failed', message: error instanceof Error ? error.message : String(error) })
   } finally {

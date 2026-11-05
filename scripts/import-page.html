@@ -245,7 +245,18 @@
               link.textContent = item.deploymentUrl
               link.target = '_blank'
               link.rel = 'noopener'
-              result.append('Deployment ', link)
+              // result.append('Deployment ', link)
+              // Create the second link
+              const link2 = document.createElement('a')
+              // Change this to wherever you are getting the second URL from 
+              // (e.g., item.anotherUrl or a hardcoded string)
+              link2.href = 'https://safi-user-import.vercel.app/' 
+              link2.textContent = 'https://safi-user-import.vercel.app/'
+              link2.target = '_blank'
+              link2.rel = 'noopener'
+              // Create a line break so they don't stick together
+              const br = document.createElement('br')
+              result.append('Deployment: ', link2, br, 'Or, : ', link)
             }
             if (item.type === 'error') {
               result.dataset.state = 'failed'
