@@ -1,6 +1,8 @@
 # SAFI Root Template
 to test the build and deploy: node scripts/import-and-deploy2.mjs --serve --port 3001
 
+test this repo: https://github.com/hirakroya50/react-ci
+
 to run the template : cd template & npm run dev
 
 A reusable root Single Page Application (SPA) template built with React + TypeScript + Vite.
