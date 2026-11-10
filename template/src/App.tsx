@@ -24,7 +24,7 @@ const App: React.FC = () => {
         </a>
         <div className="safi-sticky">
           <p className="safi-template-banner">
-            <span>This is a template UI</span>
+            <span>This is a template UI...</span>
             <span className="safi-template-company">Lotus AI Works Inc.</span>
           </p>
           <SiteHeader />
