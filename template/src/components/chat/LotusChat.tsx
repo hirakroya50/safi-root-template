@@ -17,6 +17,11 @@ function storageKey(appId: string): string {
   return `lotus-ai-chat:${appId}`
 }
 
+function bubbleId(): string {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID()
+  return `lotus-${Date.now().toString(36)}-${Math.random().toString(16).slice(2)}`
+}
+
 function loadChat(appId: string): StoredChat {
   try {
     const raw = sessionStorage.getItem(storageKey(appId))
@@ -96,7 +101,7 @@ export const LotusChat: FC = () => {
     if (appendUser) {
       setBubbles((current) => [
         ...current,
-        { id: crypto.randomUUID(), role: 'user', text: trimmed },
+        { id: bubbleId(), role: 'user', text: trimmed },
       ])
       setDraft('')
     }
@@ -106,7 +111,7 @@ export const LotusChat: FC = () => {
       setConversationId(result.conversationId)
       setBubbles((current) => [
         ...current,
-        { id: crypto.randomUUID(), role: 'assistant', text: result.reply },
+        { id: bubbleId(), role: 'assistant', text: result.reply },
       ])
     } catch (caught) {
       const message =
