@@ -16,5 +16,6 @@
     "baseUrl": ".",
     "jsx": "react-jsx"
   },
-  "include": ["src", "index.html"]
+  "include": ["src", "index.html"],
+  "exclude": ["src/server"]
 }

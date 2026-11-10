@@ -1,36 +1,11 @@
-import React from 'react'
+import type { FC } from 'react'
+import { LotusChat } from './chat/LotusChat'
 
 /**
- * Named boundary for a future assistant-ui and Windmill Chat SDK integration.
- * The pane is a demo. It does not send messages or invent replies.
+ * Named boundary for Lotus AI Chat.
+ * The widget talks to the same-origin /api/chat route.
+ * Company facts come from the validated instance configuration, not from this component.
  */
-export const ChatPane: React.FC = () => {
-  return (
-    <section className="safi-chat-pane" data-safi-chat aria-label="Demo chat">
-      <div className="safi-chat-heading">
-        <span className="safi-chat-label">
-          Demo Chat
-          <span className="safi-chat-status">(nonfunctional)</span>
-        </span>
-        <p>Reserved for a future assistant. Nothing you type here is sent.</p>
-      </div>
-      <form
-        className="safi-chat-form"
-        onSubmit={(event) => event.preventDefault()}
-      >
-        <label className="safi-visually-hidden" htmlFor="safi-chat-input">
-          Message
-        </label>
-        <input
-          id="safi-chat-input"
-          disabled
-          placeholder="Chat is a demo"
-          autoComplete="off"
-        />
-        <button type="button" disabled>
-          Send
-        </button>
-      </form>
-    </section>
-  )
+export const ChatPane: FC = () => {
+  return <LotusChat />
 }

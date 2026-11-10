@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json --noEmit",
+    "test:chat": "node --experimental-strip-types --test src/server/chat.test.ts",
+    "chat-api": "node --experimental-strip-types chat-server.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",

@@ -284,7 +284,7 @@ async function main() {
       : indexHtml.replace('<head>', `<head>\n    <meta name="safi-release" content="${sourceSha}">`)
     await writeFile(indexPath, marked)
     const rewrite = {
-      rewrites: [{ source: '/((?!assets/|release\\.json|favicon\\.ico).*)', destination: '/index.html' }],
+      rewrites: [{ source: '/((?!api/|assets/|release\\.json|favicon\\.ico).*)', destination: '/index.html' }],
     }
     await writeFile(path.join(dist, 'vercel.json'), JSON.stringify(rewrite, null, 2))
 

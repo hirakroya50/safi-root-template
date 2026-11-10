@@ -77,7 +77,48 @@ To preview a client file while the dev server is running, open
 `http://localhost:5173/?example=lotus-cafe` (the name is the JSON file in `examples/`, without `.json`).
 Every page is marked “This is a template UI” and carries the name Lotus AI Works Inc.
 Hosting supplies a real client by setting `window.__SAFI_CONFIG__` to the
-JSON before the app loads. The chat pane stays labeled as a nonfunctional demo.
+JSON before the app loads. Set `SAFI_CONFIG_PATH` to that same file so Lotus AI
+Chat reads it on the server. The browser never sends the company profile, and
+the API key never reaches the browser.
+
+## Lotus AI Chat
+
+Lotus AI Chat is the floating assistant on every site built from this template.
+It answers from the current instance configuration: name, intro, about text,
+offerings, highlights, and contact details. It does not contain a hardcoded company.
+
+`npm run dev` and `npm run preview` (from `template/`) serve `POST /api/chat`
+on the same origin. A standalone API is `npm run chat-api`, which listens on
+port 8787 unless `CHAT_PORT` is set.
+
+Put these in `template/.env`. They are read by the server only.
+
+```env
+OPENROUTER_API_KEY=your_api_key
+OPENROUTER_MODEL=openai/gpt-4o-mini
+```
+
+Optional settings: `OPENROUTER_BASE_URL`, `SAFI_CONFIG_PATH`, `CHAT_TIMEOUT_MS`
+(default 20000), `CHAT_RATE_LIMIT` (default 20), and `CHAT_RATE_WINDOW_MS`
+(default 60000). On a dev server, `/?example=business` selects a file in
+`examples/`. If `SAFI_CONFIG_PATH` is set, that file is the only profile the
+API will use.
+
+```bash
+curl -s http://localhost:5173/api/chat \
+  -H 'Content-Type: application/json' \
+  -d '{"message":"What services does this company provide?"}'
+```
+
+A successful body is `{ "reply": "...", "conversationId": "..." }`.
+Send the returned `conversationId` with the next message. Starting a new chat
+in the widget drops that id. An error body is
+`{ "error": { "code": "unavailable", "message": "..." } }` and does not include
+provider details. Chat unit tests mock OpenRouter:
+
+```bash
+cd template && npm run test:chat && npm run typecheck
+```
 
 ## Supabase
 

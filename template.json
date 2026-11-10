@@ -16,7 +16,7 @@
     "chatPane": {
       "component": "ChatPane",
       "configPath": "appId",
-      "demoLabel": "Demo Chat (nonfunctional)"
+      "demoLabel": "Lotus AI Chat"
     },
     "workspace": {
       "component": "Workspace",

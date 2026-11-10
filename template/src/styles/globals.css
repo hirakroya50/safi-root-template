@@ -875,6 +875,191 @@ a {
   color: #ffffff;
 }
 
+.lotus-open {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.lotus-launcher {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 35;
+  min-height: 48px;
+  padding: 0 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--safi-lotus);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(226, 24, 111, 0.28);
+}
+
+.lotus-launcher:hover {
+  background: #c41262;
+}
+
+.lotus-panel {
+  position: fixed;
+  right: 1rem;
+  bottom: 4.75rem;
+  z-index: 35;
+  display: flex;
+  flex-direction: column;
+  width: min(24rem, calc(100vw - 2rem));
+  max-height: min(36rem, calc(100vh - 6.5rem));
+  overflow: hidden;
+  background: var(--safi-surface);
+  color: var(--safi-on-background);
+  border: 1px solid var(--safi-line);
+  border-radius: 1.25rem;
+  box-shadow: 0 18px 50px rgba(26, 20, 35, 0.18);
+}
+
+.lotus-panel-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 0.9rem 0.7rem;
+  border-bottom: 1px solid var(--safi-line);
+}
+
+.lotus-panel-bar h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.lotus-panel-bar p {
+  margin: 0.15rem 0 0;
+  color: var(--safi-muted);
+  font-size: 0.85rem;
+}
+
+.lotus-panel-actions {
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-start;
+}
+
+.lotus-panel-actions button,
+.lotus-error button,
+.lotus-composer button {
+  border: 1px solid var(--safi-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--safi-on-background);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  min-height: 36px;
+  padding: 0 0.75rem;
+  cursor: pointer;
+}
+
+.lotus-composer button {
+  background: var(--safi-lotus);
+  color: #ffffff;
+  border-color: transparent;
+  min-height: 44px;
+}
+
+.lotus-composer button:disabled,
+.lotus-error button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.lotus-log {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  overflow: auto;
+  padding: 0.9rem;
+  min-height: 12rem;
+}
+
+.lotus-bubble {
+  margin: 0;
+  max-width: 90%;
+  padding: 0.7rem 0.85rem;
+  border-radius: 1rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+
+.lotus-bubble-assistant {
+  align-self: flex-start;
+  background: var(--safi-tint);
+}
+
+.lotus-bubble-user {
+  align-self: flex-end;
+  background: var(--safi-primary);
+  color: var(--safi-on-primary);
+}
+
+.lotus-typing,
+.lotus-error p,
+.lotus-hint {
+  margin: 0;
+  color: var(--safi-muted);
+  font-size: 0.92rem;
+}
+
+.lotus-error {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: start;
+}
+
+.lotus-error p {
+  color: #b42318;
+}
+
+.lotus-composer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid var(--safi-line);
+}
+
+.lotus-hint {
+  grid-column: 1 / -1;
+}
+
+.lotus-composer textarea {
+  width: 100%;
+  min-width: 0;
+  resize: none;
+  border: 1px solid var(--safi-line);
+  border-radius: 0.9rem;
+  background: transparent;
+  color: var(--safi-on-background);
+  font: inherit;
+  font-size: 0.95rem;
+  padding: 0.65rem 0.75rem;
+}
+
+@media (max-width: 719px) {
+  .lotus-panel {
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+  }
+
+  .lotus-composer {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .safi-spinner {
     animation: none;

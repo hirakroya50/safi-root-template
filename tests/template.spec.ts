@@ -30,8 +30,8 @@ test('renders SAFI root template with business config', async ({ page }) => {
   await expect(page.locator('.safi-kicker')).toContainText('Manage your business operations')
   // Workspace placeholder should be visible
   await expect(page.locator('.safi-workspace-placeholder')).toBeVisible()
-  // Footer chat pane should be labeled as demo
-  await expect(page.locator('.safi-chat-label')).toContainText('Demo Chat')
+  await expect(page.locator('.safi-chat-label')).toContainText('Lotus AI Chat')
+  await expect(page.getByRole('button', { name: 'Lotus AI Chat' })).toBeVisible()
 })
 
 test('renders SAFI root template with career config', async ({ page }) => {
@@ -49,8 +49,8 @@ test('renders SAFI root template with career config', async ({ page }) => {
   await expect(page.locator('.safi-kicker')).toContainText('Explore career opportunities')
   // Workspace placeholder should be visible
   await expect(page.locator('.safi-workspace-placeholder')).toBeVisible()
-  // Footer chat pane should be labeled as demo
-  await expect(page.locator('.safi-chat-label')).toContainText('Demo Chat')
+  await expect(page.locator('.safi-chat-label')).toContainText('Lotus AI Chat')
+  await expect(page.getByRole('button', { name: 'Lotus AI Chat' })).toBeVisible()
 })
 
 test('rejects invalid configuration', async ({ page }) => {
@@ -157,7 +157,7 @@ for (const [kind, file, offering, section] of clients) {
     await expect(page.locator('.safi-kicker')).toContainText(config.subtitle)
     await expect(page.getByRole('heading', { name: section, exact: true })).toBeVisible()
     await expect(page.getByRole('heading', { name: offering })).toBeVisible()
-    await expect(page.locator('.safi-chat-label')).toContainText('Demo Chat')
-    await expect(page.locator('#safi-chat-input')).toBeDisabled()
+    await expect(page.locator('.safi-chat-label')).toContainText('Lotus AI Chat')
+    await expect(page.getByRole('button', { name: 'Lotus AI Chat' })).toBeVisible()
   })
 }
