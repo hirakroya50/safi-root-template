@@ -1,16 +1,17 @@
 :root {
   --safi-primary: #f15a24;
-  --safi-background: #fff6ee;
-  --safi-surface: #ffffff;
-  --safi-on-primary: #ffffff;
-  --safi-on-background: #1a1423;
-  --safi-muted: #5b5366;
-  --safi-line: rgba(225, 29, 111, 0.16);
-  --safi-tint: rgba(241, 90, 36, 0.2);
-  --safi-header: rgba(255, 246, 238, 0.92);
+  --safi-background: #14110f;
+  --safi-surface: #211d19;
+  --safi-on-primary: #fffaf4;
+  --safi-on-background: #f3eee6;
+  --safi-muted: #b7ad9f;
+  --safi-line: rgba(241, 90, 36, 0.32);
+  --safi-tint: rgba(241, 90, 36, 0.16);
+  --safi-header: rgba(12, 11, 10, 0.78);
   --safi-lotus: #e2186f;
-  --safi-display: "Inter", "Segoe UI", system-ui, sans-serif;
-  --safi-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --safi-display: "Fraunces", "Iowan Old Style", Palatino, serif;
+  --safi-sans: "Outfit", "Avenir Next", system-ui, sans-serif;
+  --safi-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 * {
@@ -27,7 +28,8 @@ body {
   min-height: 100%;
   font-family: var(--safi-sans);
   font-size: 17px;
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.55;
   background: var(--safi-background);
   color: var(--safi-on-background);
   text-rendering: optimizeLegibility;
@@ -35,7 +37,8 @@ body {
 }
 
 ::selection {
-  background: var(--safi-tint);
+  background: var(--safi-primary);
+  color: var(--safi-on-primary);
 }
 
 a {
@@ -45,9 +48,22 @@ a {
 .safi-app {
   min-height: 100%;
   background:
-    radial-gradient(900px 420px at 100% -10%, var(--safi-tint), transparent 60%),
+    radial-gradient(720px 280px at 0% -10%, var(--safi-tint), transparent 62%),
+    linear-gradient(180deg, rgba(255, 250, 244, 0.03), transparent 18rem),
     var(--safi-background);
   color: var(--safi-on-background);
+}
+
+.safi-app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: linear-gradient(rgba(243, 238, 230, 0.04) 1px, transparent 1px);
+  background-size: 100% 7px;
+  mix-blend-mode: overlay;
 }
 
 .safi-skip {
@@ -58,7 +74,7 @@ a {
   background: var(--safi-surface);
   color: var(--safi-on-background);
   padding: 0.5rem 0.75rem;
-  border-radius: 999px;
+  border-radius: 2px;
   z-index: 30;
 }
 
@@ -79,16 +95,30 @@ a {
   gap: 0.5rem 1rem;
   flex-wrap: wrap;
   margin: 0;
-  padding: 0.45rem 1.25rem;
+  padding: 0.42rem 1.25rem;
+  background: #0c0b0a;
+  color: #d9d0c4;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(243, 238, 230, 0.08);
+}
+
+.safi-template-banner span:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  margin-right: 0.55rem;
   background: var(--safi-lotus);
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  transform: translateY(0.5px);
+  animation: safi-pulse 2.8s var(--safi-ease) infinite;
 }
 
 .safi-template-company {
-  font-weight: 700;
+  color: #f3eee6;
+  font-weight: 560;
 }
 
 .safi-header {
@@ -101,38 +131,40 @@ a {
   align-items: center;
   padding: 0.85rem 1.25rem 0.95rem;
   background: var(--safi-header);
-  border-top: 3px solid var(--safi-primary);
-  border-bottom: 1px solid var(--safi-line);
-  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(243, 238, 230, 0.08);
+  backdrop-filter: blur(18px);
 }
 
 .safi-brand {
   grid-area: brand;
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.75rem;
   min-width: 0;
   text-decoration: none;
 }
 
 .safi-monogram {
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.35rem;
+  height: 2.35rem;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  border-radius: 999px;
-  background: var(--safi-primary);
-  color: var(--safi-on-primary);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--safi-primary);
+  border: 1px solid var(--safi-line);
   font-family: var(--safi-display);
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
+  font-size: 0.95rem;
+  font-weight: 560;
+  letter-spacing: 0.02em;
 }
 
 .safi-wordmark {
   font-family: var(--safi-display);
-  font-size: 1.15rem;
-  letter-spacing: -0.02em;
+  font-size: 1.35rem;
+  font-weight: 520;
+  letter-spacing: -0.03em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -141,27 +173,44 @@ a {
 .safi-nav {
   grid-area: nav;
   display: flex;
-  gap: 0.35rem;
+  gap: 0.15rem;
   overflow-x: auto;
 }
 
 .safi-nav a {
+  position: relative;
   text-decoration: none;
   color: var(--safi-muted);
-  font-size: 0.92rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0;
   white-space: nowrap;
 }
 
-.safi-nav a:hover {
-  color: var(--safi-on-background);
-  background: var(--safi-tint);
+.safi-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0.7rem;
+  right: 0.7rem;
+  bottom: 0.28rem;
+  height: 1px;
+  background: var(--safi-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--safi-ease);
 }
 
+.safi-nav a:hover,
 .safi-nav a[aria-current='true'] {
   color: var(--safi-on-background);
-  background: var(--safi-tint);
+  background: transparent;
+}
+
+.safi-nav a:hover::after,
+.safi-nav a[aria-current='true']::after {
+  transform: scaleX(1);
 }
 
 .safi-header .safi-action {
@@ -183,39 +232,45 @@ a {
   justify-content: center;
   min-height: 44px;
   padding: 0 1.15rem;
-  border-radius: 999px;
-  background: var(--safi-lotus);
-  color: #ffffff;
+  border-radius: 2px;
+  background: var(--safi-primary);
+  color: var(--safi-on-primary);
   text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  box-shadow: 0 10px 24px rgba(226, 24, 111, 0.24);
+  font-size: 0.82rem;
+  font-weight: 560;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: transform 0.35s var(--safi-ease), filter 0.35s var(--safi-ease);
 }
 
 .safi-action:hover {
-  background: #c41262;
+  background: var(--safi-primary);
+  filter: brightness(1.08);
+  transform: translateY(-2px);
 }
 
 .safi-frame {
+  position: relative;
+  z-index: 2;
   width: min(1120px, calc(100% - 2rem));
   margin: 0 auto;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
   align-items: start;
-  padding: 2.25rem 0 4rem;
+  padding: 2.6rem 0 5rem;
 }
 
 .safi-hero {
   display: grid;
-  gap: 1.35rem;
-  align-items: stretch;
-  padding-top: 0.25rem;
+  gap: 1.6rem;
+  align-items: end;
+  padding-top: 0.4rem;
 }
 
 .safi-hero-copy {
-  max-width: 38rem;
+  max-width: 40rem;
+  animation: safi-rise 0.8s var(--safi-ease) both;
 }
 
 .safi-kicker,
@@ -224,18 +279,19 @@ a {
   margin: 0;
   color: var(--safi-primary);
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-weight: 560;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
 .safi-hero h1 {
-  margin: 0.4rem 0 0;
+  margin: 0.45rem 0 0;
   font-family: var(--safi-display);
-  font-size: clamp(2.5rem, 8vw, 4.15rem);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  font-weight: 520;
+  font-style: italic;
+  font-size: clamp(3.1rem, 8vw, 5.4rem);
+  letter-spacing: -0.045em;
+  line-height: 0.9;
   overflow-wrap: anywhere;
 }
 
@@ -245,37 +301,50 @@ a {
 }
 
 .safi-intro {
-  margin: 1.1rem 0 1.4rem;
-  max-width: 36rem;
+  margin: 1.25rem 0 1.5rem;
+  max-width: 34rem;
   font-size: 1.12rem;
+  font-weight: 400;
 }
 
 .safi-highlights {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.65rem;
+  gap: 0;
   margin: 0;
   align-content: end;
+  border-top: 1px solid rgba(243, 238, 230, 0.14);
 }
 
 .safi-highlights div {
-  background: var(--safi-surface);
-  border: 1px solid var(--safi-line);
-  border-radius: 1rem;
-  padding: 0.85rem 1rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(243, 238, 230, 0.1);
+  border-radius: 0;
+  padding: 0.85rem 0;
+  animation: safi-rise 0.8s var(--safi-ease) both;
+}
+
+.safi-highlights div:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.safi-highlights div:nth-child(3) {
+  animation-delay: 0.16s;
 }
 
 .safi-highlights dt {
   color: var(--safi-muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .safi-highlights dd {
-  margin: 0.3rem 0 0;
+  margin: 0.2rem 0 0;
   font-family: var(--safi-display);
-  font-size: clamp(1.15rem, 3vw, 1.45rem);
+  font-size: clamp(1.35rem, 3vw, 1.7rem);
+  font-weight: 520;
   letter-spacing: -0.03em;
   overflow-wrap: anywhere;
 }
@@ -284,7 +353,7 @@ a {
 .safi-about,
 .safi-contact,
 .safi-desk {
-  margin-top: 3.25rem;
+  margin-top: 3.6rem;
   scroll-margin-top: 15rem;
 }
 
@@ -292,11 +361,12 @@ a {
 .safi-about h2,
 .safi-contact h2,
 .safi-desk h2 {
-  margin: 0 0 1rem;
+  margin: 0 0 1.1rem;
   font-family: var(--safi-display);
-  font-size: clamp(2rem, 4vw, 2.6rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  font-weight: 520;
+  font-style: italic;
+  letter-spacing: -0.04em;
 }
 
 .safi-workspace-placeholder {
@@ -309,29 +379,48 @@ a {
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.8rem;
+  gap: 0;
+  counter-reset: safi-offer;
 }
 
 .safi-offering-list li {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  background: var(--safi-surface);
-  border: 1px solid var(--safi-line);
-  border-radius: 1.15rem;
-  padding: 1.15rem 1.2rem 1.25rem;
-  box-shadow: 0 12px 28px rgba(26, 20, 35, 0.04);
+  gap: 0.15rem;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(243, 238, 230, 0.12);
+  border-radius: 0;
+  padding: 1.15rem 0 1.2rem 3.4rem;
+  box-shadow: none;
+  counter-increment: safi-offer;
+  transition: padding-left 0.35s var(--safi-ease), background 0.35s var(--safi-ease);
+  animation: safi-rise 0.7s var(--safi-ease) both;
+}
+
+.safi-offering-list li::before {
+  content: counter(safi-offer, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  color: var(--safi-primary);
+  font-size: 0.72rem;
+  font-weight: 560;
+  letter-spacing: 0.14em;
 }
 
 .safi-offering-list li:hover {
-  border-color: rgba(226, 24, 111, 0.38);
+  border-color: rgba(243, 238, 230, 0.12);
+  padding-left: 3.7rem;
+  background: linear-gradient(90deg, var(--safi-tint), transparent 70%);
 }
 
 .safi-offering-list h3 {
-  margin: 0.35rem 0 0.35rem;
+  margin: 0.2rem 0 0.25rem;
   font-family: var(--safi-display);
-  font-size: 1.45rem;
-  font-weight: 500;
+  font-size: 1.7rem;
+  font-weight: 520;
   letter-spacing: -0.03em;
 }
 
@@ -345,53 +434,63 @@ a {
 .safi-offering-detail {
   color: var(--safi-muted);
   margin-top: auto;
-  padding-top: 0.35rem;
+  max-width: 38rem;
+  padding-top: 0.2rem;
 }
 
 .safi-about {
-  background: var(--safi-surface);
-  border: 1px solid var(--safi-line);
-  border-radius: 1.25rem;
-  padding: 1.35rem 1.3rem 1.5rem;
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--safi-primary);
+  border-radius: 0;
+  padding: 0.2rem 0 0.2rem 1.25rem;
 }
 
 .safi-about p {
-  max-width: 40rem;
+  max-width: 38rem;
   font-family: var(--safi-display);
-  font-size: 1.28rem;
-  line-height: 1.45;
+  font-size: 1.55rem;
+  font-style: italic;
+  font-weight: 520;
+  line-height: 1.35;
+  color: var(--safi-on-background);
 }
 
 .safi-contact dl {
   display: grid;
-  gap: 0.7rem;
+  gap: 0;
   margin: 0;
+  border-top: 1px solid rgba(243, 238, 230, 0.12);
 }
 
 .safi-contact div {
   display: grid;
   gap: 0.2rem;
   align-content: start;
-  background: var(--safi-surface);
-  border: 1px solid var(--safi-line);
-  border-radius: 1rem;
-  padding: 0.9rem 1rem;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(243, 238, 230, 0.12);
+  border-radius: 0;
+  padding: 0.95rem 0;
 }
 
 .safi-contact dt {
   color: var(--safi-muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .safi-contact dd {
   margin: 0;
-  font-size: 1.05rem;
+  font-family: var(--safi-display);
+  font-size: 1.35rem;
 }
 
 .safi-contact a {
   color: var(--safi-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 .safi-empty {
@@ -403,8 +502,8 @@ a {
 .safi-record-list h3 {
   margin: 0 0 0.35rem;
   font-family: var(--safi-display);
-  font-size: 1.35rem;
-  font-weight: 500;
+  font-size: 1.45rem;
+  font-weight: 520;
 }
 
 .safi-form,
@@ -421,9 +520,9 @@ a {
 
 .safi-field {
   display: grid;
-  gap: 0.3rem;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--safi-muted);
 }
@@ -434,13 +533,22 @@ a {
   font: inherit;
   letter-spacing: 0;
   text-transform: none;
+  font-size: 1rem;
   color: var(--safi-on-background);
-  background: var(--safi-surface);
-  border: 1px solid var(--safi-line);
-  border-radius: 0.8rem;
+  background: rgba(12, 11, 10, 0.45);
+  border: 1px solid rgba(243, 238, 230, 0.14);
+  border-radius: 2px;
   min-height: 44px;
   padding: 0.55rem 0.75rem;
   width: 100%;
+  transition: border-color 0.3s var(--safi-ease);
+}
+
+.safi-field input:focus,
+.safi-field select:focus,
+.safi-field textarea:focus {
+  border-color: var(--safi-primary);
+  outline: none;
 }
 
 .safi-form-actions {
@@ -455,32 +563,38 @@ a {
   justify-content: center;
   min-height: 44px;
   padding: 0 1.05rem;
-  border-radius: 999px;
+  border-radius: 2px;
   border: 0;
-  background: var(--safi-lotus);
-  color: #ffffff;
+  background: var(--safi-primary);
+  color: var(--safi-on-primary);
   font: inherit;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-size: 0.82rem;
+  font-weight: 560;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   cursor: pointer;
   gap: 0.45rem;
-  box-shadow: 0 10px 24px rgba(226, 24, 111, 0.22);
+  transition: transform 0.35s var(--safi-ease), filter 0.35s var(--safi-ease);
 }
 
 .safi-button:hover {
-  background: #c41262;
+  background: var(--safi-primary);
+  filter: brightness(1.08);
+  transform: translateY(-1px);
 }
 
 .safi-button-quiet,
 .safi-button-quiet:hover {
   background: transparent;
-  color: var(--safi-primary);
-  border: 1px solid var(--safi-line);
+  color: var(--safi-on-background);
+  border: 1px solid rgba(243, 238, 230, 0.2);
   box-shadow: none;
+  filter: none;
 }
 
 .safi-button-quiet:hover {
-  background: var(--safi-tint);
+  border-color: var(--safi-primary);
+  color: var(--safi-primary);
 }
 
 .safi-account-name {
@@ -488,8 +602,8 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 500;
+  font-size: 0.92rem;
 }
 
 .safi-record-list {
@@ -499,9 +613,9 @@ a {
 }
 
 .safi-record-list > li {
-  background: var(--safi-surface);
-  border: 1px solid var(--safi-line);
-  border-radius: 1.15rem;
+  background: rgba(12, 11, 10, 0.35);
+  border: 1px solid rgba(243, 238, 230, 0.1);
+  border-radius: 2px;
   padding: 1rem 1.1rem;
 }
 
@@ -516,16 +630,22 @@ a {
 }
 
 .safi-error {
-  color: #b42318;
+  color: #ffb4a8;
 }
 
 .safi-colophon {
+  position: relative;
+  z-index: 2;
   margin: 0;
-  padding: 1.25rem 1.25rem 1.75rem;
-  text-align: center;
-  color: var(--safi-lotus);
-  font-size: 0.92rem;
-  font-weight: 600;
+  padding: 0.4rem 1.25rem 5.5rem;
+  text-align: left;
+  width: min(1120px, calc(100% - 2rem));
+  margin-inline: auto;
+  color: var(--safi-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .safi-branding {
@@ -533,28 +653,43 @@ a {
 }
 
 .safi-chat-pane {
-  background: var(--safi-surface);
-  border: 1px solid var(--safi-line);
-  border-radius: 1.25rem;
-  padding: 1rem;
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--safi-tint), transparent 42%),
+    rgba(12, 11, 10, 0.55);
+  border: 1px solid rgba(243, 238, 230, 0.12);
+  border-radius: 2px;
+  padding: 1.15rem 1rem 1rem;
   display: grid;
   gap: 1rem;
   min-width: 0;
+  overflow: hidden;
+}
+
+.safi-chat-pane::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+  width: 40%;
+  height: 1px;
+  background: var(--safi-primary);
+  animation: safi-scan 4.8s var(--safi-ease) infinite;
 }
 
 .safi-chat-heading {
   display: grid;
-  gap: 0.4rem;
+  gap: 0.45rem;
   min-width: 0;
 }
 
 .safi-chat-heading p,
 .safi-chat-label {
   color: var(--safi-muted);
-  font-weight: 500;
-  letter-spacing: 0.04em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   text-transform: none;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
 }
 
 .safi-chat-label {
@@ -564,8 +699,8 @@ a {
   gap: 0.15rem;
   max-width: 100%;
   font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 560;
+  letter-spacing: 0.18em;
   line-height: 1.35;
   text-transform: uppercase;
   overflow-wrap: anywhere;
@@ -573,6 +708,11 @@ a {
 
 .safi-chat-heading p {
   overflow-wrap: break-word;
+  font-family: var(--safi-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  color: var(--safi-on-background);
 }
 
 .safi-chat-form {
@@ -584,8 +724,8 @@ a {
 
 .safi-chat-form input,
 .safi-chat-form button {
-  border: 1px solid var(--safi-line);
-  border-radius: 999px;
+  border: 1px solid rgba(243, 238, 230, 0.16);
+  border-radius: 2px;
   background: transparent;
   color: var(--safi-muted);
   min-height: 44px;
@@ -617,13 +757,20 @@ a {
 @media (min-width: 480px) and (max-width: 959px) {
   .safi-highlights {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 0;
+  }
+
+  .safi-highlights div {
+    border-bottom: 0;
+    border-top: 1px solid rgba(243, 238, 230, 0.14);
+    padding-right: 0.8rem;
   }
 }
 
 @media (min-width: 720px) {
-  .safi-offering-list,
   .safi-contact dl {
     grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
   }
 }
 
@@ -641,13 +788,13 @@ a {
   .safi-frame {
     grid-template-columns: minmax(0, 1fr) 300px;
     width: min(1120px, calc(100% - 3rem));
-    padding-top: 2.5rem;
+    padding-top: 3rem;
   }
 
   .safi-hero {
     grid-template-columns: minmax(0, 1.4fr) minmax(15rem, 0.72fr);
-    gap: 1.75rem;
-    align-items: start;
+    gap: 2.4rem;
+    align-items: end;
   }
 
   .safi-chat-pane {
@@ -660,6 +807,10 @@ a {
   .safi-contact,
   .safi-desk {
     scroll-margin-top: 8.5rem;
+  }
+
+  .safi-colophon {
+    width: min(1120px, calc(100% - 3rem));
   }
 }
 
@@ -685,7 +836,7 @@ a {
 
   .safi-frame {
     width: min(1120px, calc(100% - 1.5rem));
-    padding-top: 1.5rem;
+    padding-top: 1.6rem;
   }
 
   .safi-chat-form {
@@ -693,19 +844,17 @@ a {
   }
 
   .safi-about p {
-    font-size: 1.12rem;
+    font-size: 1.28rem;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  .safi-colophon {
+    width: min(1120px, calc(100% - 1.5rem));
   }
 }
 
 @media (max-width: 479px) {
   .safi-highlights dd {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -716,18 +865,21 @@ a {
   display: grid;
   place-items: center;
   padding: 1rem;
-  background: rgba(26, 20, 35, 0.46);
+  background: rgba(8, 7, 6, 0.72);
+  backdrop-filter: blur(8px);
 }
 
 .safi-modal-panel {
   width: min(26rem, 100%);
   max-height: min(40rem, calc(100% - 2rem));
   overflow: auto;
-  background: var(--safi-surface);
+  background: #161310;
   color: var(--safi-on-background);
-  border-radius: 1.25rem;
+  border: 1px solid rgba(243, 238, 230, 0.12);
+  border-radius: 2px;
   padding: 1.15rem 1.15rem 1.3rem;
-  box-shadow: 0 24px 60px rgba(26, 20, 35, 0.22);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  animation: safi-rise 0.35s var(--safi-ease) both;
 }
 
 .safi-modal-head {
@@ -740,8 +892,9 @@ a {
 .safi-modal-head h2 {
   margin: 0;
   font-family: var(--safi-display);
-  font-size: 1.6rem;
-  font-weight: 600;
+  font-size: 1.85rem;
+  font-style: italic;
+  font-weight: 520;
   letter-spacing: -0.03em;
 }
 
@@ -750,7 +903,7 @@ a {
   width: 2.25rem;
   height: 2.25rem;
   border: 0;
-  border-radius: 999px;
+  border-radius: 2px;
   background: transparent;
   color: var(--safi-muted);
   font: inherit;
@@ -770,26 +923,30 @@ a {
   grid-template-columns: 1fr 1fr;
   gap: 0.35rem;
   margin: 1rem 0 0.25rem;
-  padding: 0.25rem;
-  border-radius: 999px;
-  background: var(--safi-background);
+  padding: 0.2rem;
+  border-radius: 2px;
+  background: rgba(12, 11, 10, 0.55);
+  border: 1px solid rgba(243, 238, 230, 0.08);
 }
 
 .safi-auth-switch button {
   min-height: 40px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 2px;
   background: transparent;
   color: var(--safi-muted);
   font: inherit;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
   cursor: pointer;
 }
 
 .safi-auth-switch button[aria-selected='true'] {
   background: var(--safi-surface);
   color: var(--safi-on-background);
-  box-shadow: 0 1px 4px rgba(26, 20, 35, 0.08);
+  box-shadow: none;
 }
 
 .safi-modal .safi-form {
@@ -799,11 +956,12 @@ a {
 .safi-button:disabled {
   cursor: progress;
   opacity: 0.8;
+  transform: none;
 }
 
 .safi-button .safi-spinner {
-  border-color: rgba(255, 255, 255, 0.35);
-  border-top-color: #ffffff;
+  border-color: rgba(255, 250, 244, 0.35);
+  border-top-color: var(--safi-on-primary);
 }
 
 .safi-spinner {
@@ -821,11 +979,41 @@ a {
   }
 }
 
+@keyframes safi-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes safi-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes safi-scan {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
 .safi-toasts {
   position: fixed;
   z-index: 50;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 5.5rem;
   display: grid;
   gap: 0.55rem;
   width: min(22rem, calc(100% - 2rem));
@@ -837,29 +1025,32 @@ a {
   align-items: flex-start;
   gap: 0.65rem;
   margin: 0;
-  padding: 0.7rem 0.55rem 0.7rem 0.8rem;
-  border-radius: 1rem;
-  background: #1a1423;
-  color: #fff7fb;
-  box-shadow: 0 12px 30px rgba(26, 20, 35, 0.24);
+  padding: 0.75rem 0.55rem 0.75rem 0.8rem;
+  border-radius: 2px;
+  background: #1c1916;
+  color: #f3eee6;
+  border: 1px solid rgba(243, 238, 230, 0.12);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
   pointer-events: auto;
+  animation: safi-rise 0.35s var(--safi-ease) both;
 }
 
 .safi-toast-badge {
   flex: 0 0 auto;
   margin-top: 0.1rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 999px;
-  background: #e2186f;
-  color: #ffffff;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 2px;
+  background: var(--safi-primary);
+  color: var(--safi-on-primary);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .safi-toast-error .safi-toast-badge {
-  background: #b42318;
+  background: #8f2d24;
+  color: #fffaf4;
 }
 
 .safi-toast-dismiss {
@@ -867,11 +1058,11 @@ a {
   width: 1.75rem;
   height: 1.75rem;
   margin-left: auto;
-  color: #fff7fb;
+  color: #f3eee6;
 }
 
 .safi-toast-dismiss:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
 }
 
@@ -887,21 +1078,39 @@ a {
   right: 1rem;
   bottom: 1rem;
   z-index: 35;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
   min-height: 48px;
-  padding: 0 1.1rem;
-  border: 0;
-  border-radius: 999px;
-  background: var(--safi-lotus);
-  color: #ffffff;
+  padding: 0 1rem 0 0.85rem;
+  border: 1px solid var(--safi-line);
+  border-radius: 2px;
+  background: rgba(12, 11, 10, 0.92);
+  color: #f3eee6;
   font: inherit;
-  font-size: 0.95rem;
-  font-weight: 650;
+  font-size: 0.78rem;
+  font-weight: 560;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 12px 28px rgba(226, 24, 111, 0.28);
+  backdrop-filter: blur(12px);
+  transition: transform 0.35s var(--safi-ease), border-color 0.35s var(--safi-ease);
 }
 
-.lotus-launcher:hover {
-  background: #c41262;
+.lotus-launcher::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--safi-primary);
+  box-shadow: 0 0 0 0 var(--safi-tint);
+  animation: safi-live 2.2s var(--safi-ease) infinite;
+}
+
+.lotus-launcher:hover,
+.lotus-launcher[aria-expanded='true'] {
+  transform: translateY(-2px);
+  border-color: var(--safi-primary);
 }
 
 .lotus-panel {
@@ -912,33 +1121,40 @@ a {
   display: flex;
   flex-direction: column;
   width: min(24rem, calc(100vw - 2rem));
-  max-height: min(36rem, calc(100vh - 6.5rem));
+  max-height: min(34rem, calc(100vh - 12rem));
   overflow: hidden;
-  background: var(--safi-surface);
+  background: #120f0d;
   color: var(--safi-on-background);
-  border: 1px solid var(--safi-line);
-  border-radius: 1.25rem;
-  box-shadow: 0 18px 50px rgba(26, 20, 35, 0.18);
+  border: 1px solid rgba(243, 238, 230, 0.12);
+  border-top: 2px solid var(--safi-primary);
+  border-radius: 2px;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48);
+  animation: safi-panel 0.38s var(--safi-ease) both;
 }
 
 .lotus-panel-bar {
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.9rem 0.9rem 0.7rem;
-  border-bottom: 1px solid var(--safi-line);
+  padding: 0.95rem 0.95rem 0.75rem;
+  border-bottom: 1px solid rgba(243, 238, 230, 0.08);
 }
 
 .lotus-panel-bar h2 {
   margin: 0;
-  font-size: 1rem;
-  font-weight: 650;
+  font-family: var(--safi-display);
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 520;
+  letter-spacing: -0.03em;
 }
 
 .lotus-panel-bar p {
-  margin: 0.15rem 0 0;
+  margin: 0.1rem 0 0;
   color: var(--safi-muted);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .lotus-panel-actions {
@@ -950,59 +1166,78 @@ a {
 .lotus-panel-actions button,
 .lotus-error button,
 .lotus-composer button {
-  border: 1px solid var(--safi-line);
-  border-radius: 999px;
+  border: 1px solid rgba(243, 238, 230, 0.16);
+  border-radius: 2px;
   background: transparent;
   color: var(--safi-on-background);
   font: inherit;
-  font-size: 0.82rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 560;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   min-height: 36px;
-  padding: 0 0.75rem;
+  padding: 0 0.7rem;
   cursor: pointer;
+  transition: border-color 0.3s var(--safi-ease), color 0.3s var(--safi-ease);
+}
+
+.lotus-panel-actions button:hover,
+.lotus-error button:hover {
+  border-color: var(--safi-primary);
+  color: var(--safi-primary);
 }
 
 .lotus-composer button {
-  background: var(--safi-lotus);
-  color: #ffffff;
+  background: var(--safi-primary);
+  color: var(--safi-on-primary);
   border-color: transparent;
   min-height: 44px;
+}
+
+.lotus-composer button:hover:not(:disabled) {
+  filter: brightness(1.08);
 }
 
 .lotus-composer button:disabled,
 .lotus-error button:disabled {
   cursor: not-allowed;
-  opacity: 0.55;
+  opacity: 0.45;
 }
 
 .lotus-log {
   display: flex;
+  flex: 1;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 0.75rem;
   overflow: auto;
-  padding: 0.9rem;
-  min-height: 12rem;
+  padding: 0.95rem;
+  min-height: 0;
+  background:
+    linear-gradient(180deg, rgba(243, 238, 230, 0.03), transparent 2.5rem);
 }
 
 .lotus-bubble {
   margin: 0;
-  max-width: 90%;
-  padding: 0.7rem 0.85rem;
-  border-radius: 1rem;
+  max-width: 92%;
+  padding: 0.7rem 0.8rem;
+  border-radius: 2px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   line-height: 1.45;
+  animation: safi-rise 0.35s var(--safi-ease) both;
 }
 
 .lotus-bubble-assistant {
   align-self: flex-start;
-  background: var(--safi-tint);
+  background: transparent;
+  border-left: 2px solid var(--safi-primary);
+  padding-left: 0.75rem;
 }
 
 .lotus-bubble-user {
   align-self: flex-end;
-  background: var(--safi-primary);
-  color: var(--safi-on-primary);
+  background: var(--safi-tint);
+  color: var(--safi-on-background);
 }
 
 .lotus-typing,
@@ -1010,7 +1245,12 @@ a {
 .lotus-hint {
   margin: 0;
   color: var(--safi-muted);
-  font-size: 0.92rem;
+  font-size: 0.86rem;
+}
+
+.lotus-typing span {
+  display: inline-block;
+  animation: safi-pulse 1.1s steps(1) infinite;
 }
 
 .lotus-error {
@@ -1020,7 +1260,7 @@ a {
 }
 
 .lotus-error p {
-  color: #b42318;
+  color: #ffb4a8;
 }
 
 .lotus-composer {
@@ -1028,24 +1268,54 @@ a {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem;
   padding: 0.75rem;
-  border-top: 1px solid var(--safi-line);
+  border-top: 1px solid rgba(243, 238, 230, 0.08);
+  background: rgba(8, 7, 6, 0.45);
 }
 
 .lotus-hint {
   grid-column: 1 / -1;
+  letter-spacing: 0.04em;
 }
 
 .lotus-composer textarea {
   width: 100%;
   min-width: 0;
   resize: none;
-  border: 1px solid var(--safi-line);
-  border-radius: 0.9rem;
+  border: 1px solid rgba(243, 238, 230, 0.14);
+  border-radius: 2px;
   background: transparent;
   color: var(--safi-on-background);
   font: inherit;
   font-size: 0.95rem;
   padding: 0.65rem 0.75rem;
+}
+
+.lotus-composer textarea:focus {
+  border-color: var(--safi-primary);
+  outline: none;
+}
+
+@keyframes safi-panel {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes safi-live {
+  0% {
+    box-shadow: 0 0 0 0 var(--safi-tint);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
 }
 
 @media (max-width: 719px) {
@@ -1055,13 +1325,41 @@ a {
     width: auto;
   }
 
+  .lotus-panel-bar {
+    flex-direction: column;
+  }
+
   .lotus-composer {
     grid-template-columns: 1fr;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .safi-spinner {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .safi-spinner,
+  .safi-template-banner span:first-child::before,
+  .safi-chat-pane::after,
+  .lotus-launcher::before,
+  .lotus-typing span {
     animation: none;
+  }
+
+  .safi-hero-copy,
+  .safi-highlights div,
+  .safi-offering-list li,
+  .safi-modal-panel,
+  .safi-toast,
+  .lotus-panel,
+  .lotus-bubble,
+  .safi-action,
+  .safi-button,
+  .lotus-launcher,
+  .safi-nav a::after,
+  .safi-offering-list li {
+    animation: none;
+    transition: none;
   }
 }

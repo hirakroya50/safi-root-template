@@ -271,23 +271,20 @@ function mix(base: RGB, target: RGB, amount: number): string {
 }
 
 export function themeVars(palette: Palette): CSSProperties {
-  const background = parseColor(palette.background) ?? { r: 255, g: 246, b: 238 }
   const primary = parseColor(palette.primary) ?? { r: 241, g: 90, b: 36 }
-  const light = luminance(background) > 0.45
-  const ink = light ? '#1a1423' : '#fff7fb'
-  const muted = light ? '#5b5366' : '#e7dbe3'
-  const onPrimary = luminance(primary) > 0.62 ? '#1a1423' : '#ffffff'
-  const paper = light ? { r: 255, g: 255, b: 255 } : { r: 42, g: 16, b: 36 }
+  const night = { r: 12, g: 11, b: 10 }
+  const paper = { r: 27, g: 25, b: 22 }
+  const onPrimary = luminance(primary) > 0.62 ? '#141210' : '#fffaf4'
 
   return {
     '--safi-primary': palette.primary,
-    '--safi-background': palette.background,
-    '--safi-on-background': ink,
-    '--safi-muted': muted,
+    '--safi-background': mix(night, primary, 0.08),
+    '--safi-on-background': '#f3eee6',
+    '--safi-muted': '#b7ad9f',
     '--safi-on-primary': onPrimary,
-    '--safi-surface': mix(background, paper, 0.9),
-    '--safi-line': light ? 'rgba(225, 29, 111, 0.16)' : 'rgba(255, 247, 251, 0.18)',
-    '--safi-tint': `rgba(${primary.r}, ${primary.g}, ${primary.b}, 0.2)`,
-    '--safi-header': `rgba(${background.r}, ${background.g}, ${background.b}, 0.92)`,
+    '--safi-surface': mix(paper, primary, 0.1),
+    '--safi-line': `rgba(${primary.r}, ${primary.g}, ${primary.b}, 0.32)`,
+    '--safi-tint': `rgba(${primary.r}, ${primary.g}, ${primary.b}, 0.16)`,
+    '--safi-header': 'rgba(12, 11, 10, 0.78)',
   } as CSSProperties
 }
