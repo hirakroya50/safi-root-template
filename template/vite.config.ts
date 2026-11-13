@@ -2,13 +2,30 @@ import fs from 'node:fs'
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
+
+const templateRoot = path.dirname(fileURLToPath(import.meta.url))
 import { defaultConfig, normalizeConfig, type InstanceConfig } from './src/config.ts'
 import { createChatService, type ChatService } from './src/server/chat.ts'
 import { createOpenRouterModel } from './src/server/llm.ts'
 
-const examplesDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../examples')
+const examplesDir = path.resolve(templateRoot, '../examples')
+
+function bundleExamples(): Plugin {
+  return {
+    name: 'safi-bundle-examples',
+    closeBundle() {
+      const outDir = path.resolve(templateRoot, 'dist/examples')
+      fs.mkdirSync(outDir, { recursive: true })
+      for (const name of fs.readdirSync(examplesDir)) {
+        if (!/^[a-z0-9-]+\.json$/.test(name)) continue
+        fs.copyFileSync(path.join(examplesDir, name), path.join(outDir, name))
+      }
+    },
+  }
+}
 
 function serveExamples(): Plugin {
   return {
@@ -179,7 +196,7 @@ function lotusChat(env: Record<string, string>): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    plugins: [react(), serveExamples(), lotusChat(env)],
+    plugins: [react(), serveExamples(), bundleExamples(), lotusChat(env)],
     base: './',
     build: {
       outDir: 'dist',

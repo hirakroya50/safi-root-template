@@ -480,7 +480,12 @@ async function runImport({ gitUrl, zipPath, onEvent }) {
     const dist = await findDist(root)
     if (!(await exists(path.join(dist, 'vercel.json')))) {
       const rewrite = {
-        rewrites: [{ source: '/((?!api/|assets/|favicon\\.ico).*)', destination: '/index.html' }],
+        rewrites: [
+          {
+            source: '/((?!api/|assets/|examples/|release\\.json|favicon\\.ico).*)',
+            destination: '/index.html',
+          },
+        ],
       }
       await writeFile(path.join(dist, 'vercel.json'), JSON.stringify(rewrite))
     }

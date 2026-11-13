@@ -75,6 +75,7 @@ Examples for the same shell:
 With no injected configuration, the dev server shows the coffee shop sample.
 To preview a client file while the dev server is running, open
 `http://localhost:5173/?example=lotus-cafe` (the name is the JSON file in `examples/`, without `.json`).
+Production builds copy those JSON files to `dist/examples/`. Set the Vercel project root to `template/` and keep `template/vercel.json` so `/examples/*.json` is not rewritten to `index.html`.
 Every page is marked “This is a template UI” and carries the name Lotus AI Works Inc.
 Hosting supplies a real client by setting `window.__SAFI_CONFIG__` to the
 JSON before the app loads. Set `SAFI_CONFIG_PATH` to that same file so Lotus AI

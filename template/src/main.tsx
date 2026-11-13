@@ -6,9 +6,15 @@ import './styles/globals.css'
 async function loadExample() {
   const example = new URLSearchParams(window.location.search).get('example')
   if (!example || !/^[a-z0-9-]+$/.test(example)) return
-  const response = await fetch(`/examples/${example}.json`)
-  if (!response.ok) return
-  ;(window as Window & { __SAFI_CONFIG__?: unknown }).__SAFI_CONFIG__ = await response.json()
+  try {
+    const response = await fetch(`/examples/${example}.json`, { cache: 'no-store' })
+    if (!response.ok) return
+    const kind = response.headers.get('content-type') ?? ''
+    if (!kind.includes('json')) return
+    ;(window as Window & { __SAFI_CONFIG__?: unknown }).__SAFI_CONFIG__ = await response.json()
+  } catch {
+    /* keep default sample when the example file is missing or misrouted */
+  }
 }
 
 loadExample().finally(() => {
